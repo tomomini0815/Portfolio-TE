@@ -260,6 +260,11 @@ const AdminPage = () => {
             </motion.div>
           ))}
         </div>
+
+        {/* Experience Manager */}
+        <div className="mt-16 pt-16 border-t border-border">
+          <ExperienceManager />
+        </div>
       </div>
 
       <ImageLightbox

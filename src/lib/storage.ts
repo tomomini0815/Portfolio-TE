@@ -95,6 +95,70 @@ export function deleteProject(id: string): void {
   saveProjects(projects);
 }
 
+// --- Experience CRUD ---
+
+const defaultExperiences: Experience[] = [
+  {
+    id: 'exp-1',
+    company: 'テックスタートアップ A社',
+    role: 'UI/UXデザイナー',
+    period: '2022年4月 - 現在',
+    description: 'モバイルアプリのUI/UXデザインを担当。ユーザーリサーチからプロトタイピング、デザインシステムの構築まで一貫して対応。',
+    tags: ['Figma', 'ユーザーリサーチ', 'デザインシステム'],
+    image: '',
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: 'exp-2',
+    company: 'Web制作会社 B社',
+    role: 'フロントエンドエンジニア',
+    period: '2020年1月 - 2022年3月',
+    description: 'React/Next.jsを用いたWebアプリケーション開発。パフォーマンス改善やアクセシビリティ対応にも注力。',
+    tags: ['React', 'Next.js', 'TypeScript'],
+    image: '',
+    createdAt: new Date().toISOString(),
+  },
+];
+
+export function getExperiences(): Experience[] {
+  const stored = localStorage.getItem(EXP_STORAGE_KEY);
+  if (!stored) {
+    localStorage.setItem(EXP_STORAGE_KEY, JSON.stringify(defaultExperiences));
+    return defaultExperiences;
+  }
+  return JSON.parse(stored);
+}
+
+export function saveExperiences(experiences: Experience[]): void {
+  localStorage.setItem(EXP_STORAGE_KEY, JSON.stringify(experiences));
+}
+
+export function addExperience(exp: Omit<Experience, 'id' | 'createdAt'>): Experience {
+  const experiences = getExperiences();
+  const newExp: Experience = {
+    ...exp,
+    id: crypto.randomUUID(),
+    createdAt: new Date().toISOString(),
+  };
+  experiences.unshift(newExp);
+  saveExperiences(experiences);
+  return newExp;
+}
+
+export function updateExperience(id: string, updates: Partial<Experience>): void {
+  const experiences = getExperiences();
+  const idx = experiences.findIndex(e => e.id === id);
+  if (idx !== -1) {
+    experiences[idx] = { ...experiences[idx], ...updates };
+    saveExperiences(experiences);
+  }
+}
+
+export function deleteExperience(id: string): void {
+  const experiences = getExperiences().filter(e => e.id !== id);
+  saveExperiences(experiences);
+}
+
 export function fileToBase64(file: File): Promise<string> {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();

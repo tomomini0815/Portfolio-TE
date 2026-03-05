@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Briefcase } from "lucide-react";
+
 import { type Experience } from "@/lib/storage";
 import ImageLightbox from "./ImageLightbox";
 import { useState } from "react";
