@@ -4,6 +4,7 @@ import { Plus, Trash2, Upload, ArrowLeft, X, Image as ImageIcon } from "lucide-r
 import { Link } from "react-router-dom";
 import { getProjects, addProject, updateProject, deleteProject, fileToBase64, type Project } from "@/lib/storage";
 import ImageLightbox from "@/components/ImageLightbox";
+import ExperienceManager from "@/components/admin/ExperienceManager";
 
 const AdminPage = () => {
   const [projects, setProjects] = useState<Project[]>(getProjects);
