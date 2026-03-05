@@ -9,7 +9,19 @@ export interface Project {
   createdAt: string;
 }
 
+export interface Experience {
+  id: string;
+  company: string;
+  role: string;
+  period: string;
+  description: string;
+  tags: string[];
+  image?: string; // base64 or data URL
+  createdAt: string;
+}
+
 const STORAGE_KEY = 'portfolio_projects';
+const EXP_STORAGE_KEY = 'portfolio_experiences';
 
 const defaultProjects: Project[] = [
   {
