@@ -17,13 +17,13 @@ const ProjectsSection = ({ projects }: ProjectsSectionProps) => {
 
   return (
     <>
-      <section id="projects" className="py-32">
+      <section id="projects" className="py-32 relative">
         <div className="container">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             className="mb-16"
           >
             <p className="text-primary text-xs font-display font-medium tracking-[0.3em] uppercase mb-4">
