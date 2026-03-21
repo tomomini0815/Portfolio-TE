@@ -3,6 +3,8 @@ import { useState } from "react";
 import type { Project } from "@/lib/storage";
 import ProjectCard from "./ProjectCard";
 import ImageLightbox from "./ImageLightbox";
+import ProjectDetailModal from "./ProjectDetailModal";
+import { TextReveal } from "./animations/TextReveal";
 
 interface ProjectsSectionProps {
   projects: Project[];
@@ -10,9 +12,14 @@ interface ProjectsSectionProps {
 
 const ProjectsSection = ({ projects }: ProjectsSectionProps) => {
   const [lightbox, setLightbox] = useState<{ images: string[]; index: number } | null>(null);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   const openLightbox = (images: string[], index: number) => {
     setLightbox({ images, index });
+  };
+
+  const openDetail = (project: Project) => {
+    setSelectedProject(project);
   };
 
   return (
@@ -29,18 +36,28 @@ const ProjectsSection = ({ projects }: ProjectsSectionProps) => {
             <p className="text-primary text-xs font-display font-medium tracking-[0.3em] uppercase mb-4">
               Projects
             </p>
-            <h2 className="font-display text-4xl md:text-5xl font-bold">
+            <TextReveal className="font-display text-4xl md:text-5xl font-bold" wordMode={false}>
               個人開発プロジェクト
-            </h2>
+            </TextReveal>
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3, duration: 0.6 }}
+              className="text-muted-foreground text-base mt-4 max-w-2xl font-body"
+            >
+              AI技術を活用した実用的なWebアプリケーションを個人で設計・開発・運用しています
+            </motion.p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 gap-6">
             {projects.map((project, i) => (
               <ProjectCard
                 key={project.id}
                 project={project}
                 index={i}
                 onImageClick={openLightbox}
+                onOpenDetail={openDetail}
               />
             ))}
           </div>
@@ -60,6 +77,12 @@ const ProjectsSection = ({ projects }: ProjectsSectionProps) => {
         currentIndex={lightbox?.index ?? 0}
         isOpen={!!lightbox}
         onClose={() => setLightbox(null)}
+      />
+
+      <ProjectDetailModal
+        project={selectedProject}
+        isOpen={!!selectedProject}
+        onClose={() => setSelectedProject(null)}
       />
     </>
   );

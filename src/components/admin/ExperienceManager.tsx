@@ -15,7 +15,7 @@ const ExperienceManager = () => {
 
   const handleNew = () => {
     setEditing({
-      id: '', company: '', role: '', period: '', description: '', tags: [], image: '', createdAt: '',
+      id: '', company: '', role: '', period: '', description: '', overview: '', team: '', tags: [], image: '', createdAt: '',
     });
     setIsNew(true);
   };
@@ -25,7 +25,7 @@ const ExperienceManager = () => {
     if (isNew) {
       addExperience({
         company: editing.company, role: editing.role, period: editing.period,
-        description: editing.description, tags: editing.tags, image: editing.image,
+        description: editing.description, overview: editing.overview, team: editing.team, tags: editing.tags, image: editing.image,
       });
     } else {
       updateExperience(editing.id, editing);
@@ -114,9 +114,32 @@ const ExperienceManager = () => {
                 value={editing.description}
                 onChange={e => setEditing({ ...editing, description: e.target.value })}
                 rows={3}
-                className="w-full bg-secondary rounded-lg px-4 py-2.5 text-sm font-body focus:outline-none focus:ring-2 focus:ring-primary resize-none"
+                className="w-full bg-secondary rounded-lg px-4 py-2.5 text-sm font-body focus:outline-none focus:ring-2 focus:ring-primary resize-none mb-4"
                 placeholder="担当した業務やプロジェクトの説明"
               />
+              
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="text-sm font-display text-muted-foreground mb-1.5 block">プロジェクト概要 (PDF用)</label>
+                  <textarea
+                    value={editing.overview || ''}
+                    onChange={e => setEditing({ ...editing, overview: e.target.value })}
+                    rows={2}
+                    className="w-full bg-secondary rounded-lg px-4 py-2.5 text-sm font-body focus:outline-none focus:ring-2 focus:ring-primary resize-none"
+                    placeholder="プロジェクトの概要"
+                  />
+                </div>
+                <div>
+                  <label className="text-sm font-display text-muted-foreground mb-1.5 block">制作体制 (PDF用)</label>
+                  <textarea
+                    value={editing.team || ''}
+                    onChange={e => setEditing({ ...editing, team: e.target.value })}
+                    rows={2}
+                    className="w-full bg-secondary rounded-lg px-4 py-2.5 text-sm font-body focus:outline-none focus:ring-2 focus:ring-primary resize-none"
+                    placeholder="制作体制（PDM:1名など）"
+                  />
+                </div>
+              </div>
             </div>
 
             <div>

@@ -97,4 +97,35 @@
   .text-dim {
     color: hsl(var(--text-dim));
   }
+
+  .container {
+    @apply px-[12px] sm:px-[32px];
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .text-shimmer {
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0) 25%,
+      rgba(255, 255, 255, 0.4) 50%,
+      rgba(255, 255, 255, 0) 75%,
+      transparent 100%
+    );
+    background-size: 200% 100%;
+    @apply bg-clip-text text-transparent;
+    animation: shimmer 4s infinite linear;
+    display: inline-block;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
 }

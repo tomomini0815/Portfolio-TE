@@ -148,13 +148,18 @@ const ImageLightbox = ({ images, currentIndex, isOpen, onClose }: ImageLightboxP
             <motion.img
               key={index}
               initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
+              animate={{ 
+                opacity: 1, 
+                scale: scale,
+                x: position.x,
+                y: position.y
+              }}
               src={images[index]}
               alt=""
               className="max-w-full max-h-[85vh] object-contain select-none"
+              transition={isDragging ? { duration: 0 } : { duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
               style={{
-                transform: `scale(${scale}) translate(${position.x / scale}px, ${position.y / scale}px)`,
-                transition: isDragging ? 'none' : 'transform 0.2s ease-out',
+                cursor: scale > 1 ? (isDragging ? 'grabbing' : 'grab') : 'default'
               }}
               draggable={false}
             />

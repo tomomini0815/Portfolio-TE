@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { getProjects, getExperiences, type Project, type Experience } from "@/lib/storage";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
+import HCDSection from "@/components/HCDSection";
 import ProjectsSection from "@/components/ProjectsSection";
 import ExperienceSection from "@/components/ExperienceSection";
 import AboutSection from "@/components/AboutSection";
@@ -20,6 +21,7 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       <HeroSection />
+      <HCDSection />
       <ProjectsSection projects={projects} />
       <ExperienceSection experiences={experiences} />
       <AboutSection />

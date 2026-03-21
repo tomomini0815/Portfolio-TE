@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PDF Extractor</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+</head>
+<body>
+    <h1 id="status">Extracting...</h1>
+    <script>
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+        async function extract() {
+            try {
+                const pdf = await pdfjsLib.getDocument('/pdf').promise;
+                console.log('PDF loaded', pdf.numPages);
+                
+                for (let i = 1; i <= pdf.numPages; i++) {
+                    const page = await pdf.getPage(i);
+                    const viewport = page.getViewport({ scale: 2.0 });
+                    
+                    const canvas = document.createElement('canvas');
+                    const context = canvas.getContext('2d');
+                    canvas.height = viewport.height;
+                    canvas.width = viewport.width;
+                    
+                    await page.render({
+                        canvasContext: context,
+                        viewport: viewport
+                    }).promise;
+                    
+                    const dataUrl = canvas.toDataURL('image/png');
+                    
+                    await fetch('/upload', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            filename: `page_${i}.png`,
+                            image: dataUrl
+                        })
+                    });
+                    console.log('Processed page', i);
+                }
+                
+                document.getElementById('status').innerText = 'EXTRACTED';
+            } catch (err) {
+                console.error(err);
+                document.getElementById('status').innerText = 'ERROR: ' + err.message;
+            }
+        }
+        
+        extract();
+    </script>
+</body>
+</html>
