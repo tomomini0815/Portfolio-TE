@@ -150,7 +150,7 @@ const ProjectDetailModal = ({ project, isOpen, onClose }: ProjectDetailModalProp
                         transition={{
                           repeat: Infinity,
                           repeatType: "loop",
-                          duration: project.images.length * 5, // 1枚あたり5秒のゆっくりとしたスクロール
+                          duration: project.id === 'lifebridge' ? 30 : project.images.length * 5, // LifeBridgeの画像は非常に長いため特別に30秒かけてスクロール
                           ease: "linear",
                         }}
                       >
@@ -160,7 +160,11 @@ const ProjectDetailModal = ({ project, isOpen, onClose }: ProjectDetailModalProp
                             key={idx}
                             src={img}
                             alt={`${project.title} screenshot ${idx}`}
-                            className="w-full h-auto object-cover block shadow-sm border-b border-white/5"
+                            className="w-full h-auto object-cover block shadow-sm border-b border-white/5 render-crisp"
+                            style={{ 
+                              imageRendering: '-webkit-optimize-contrast' as any,
+                              clipPath: project.id === 'lifebridge' ? 'inset(0 2px 0 0)' : undefined 
+                            }}
                           />
                         ))}
                       </motion.div>

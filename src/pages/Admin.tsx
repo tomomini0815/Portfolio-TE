@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Plus, Trash2, Upload, ArrowLeft, X, Image as ImageIcon } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -7,13 +7,28 @@ import ImageLightbox from "@/components/ImageLightbox";
 import ExperienceManager from "@/components/admin/ExperienceManager";
 
 const AdminPage = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [projects, setProjects] = useState<Project[]>(getProjects);
   const [editing, setEditing] = useState<Project | null>(null);
   const [isNew, setIsNew] = useState(false);
   const [lightbox, setLightbox] = useState<{ images: string[]; index: number } | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  useEffect(() => {
+    if (!isAuthenticated) {
+      const psw = prompt("管理用パスワードを入力してください");
+      if (psw === "tomomi0815" || psw === "tomomi") {
+        setIsAuthenticated(true);
+      } else {
+        alert("パスワードが違います。トップページに戻ります。");
+        window.location.href = "/";
+      }
+    }
+  }, [isAuthenticated]);
+
   const refresh = () => setProjects(getProjects());
+
+  if (!isAuthenticated) return null;
 
   const handleNew = () => {
     setEditing({

@@ -84,7 +84,11 @@ const ProjectCard = ({ project, index, onImageClick, onOpenDetail }: ProjectCard
           <motion.img
             src={project.images[0]}
             alt={project.title}
-            className="w-full h-full object-cover object-top"
+            className="w-full h-full object-cover object-top render-crisp"
+            style={{ 
+              imageRendering: '-webkit-optimize-contrast' as any,
+              clipPath: project.id === 'lifebridge' ? 'inset(0 2px 0 0)' : undefined 
+            }}
             whileHover={{ scale: 1.08 }}
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           />

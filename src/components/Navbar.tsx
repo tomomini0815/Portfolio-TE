@@ -15,21 +15,18 @@ const Navbar = () => {
 
         {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-8">
-          <a href="#projects" className="text-sm text-muted-foreground hover:text-foreground transition-colors font-display">
-            Projects
+          <a href="#projects" className="group flex flex-col items-center transition-opacity hover:opacity-80">
+            <span className="text-sm font-display leading-tight text-foreground">Projects</span>
+            <span className="text-[10px] font-body tracking-wider mt-0.5 text-muted-foreground">制作実績</span>
           </a>
-          <a href="#experience" className="text-sm text-muted-foreground hover:text-foreground transition-colors font-display">
-            Experience
+          <a href="#experience" className="group flex flex-col items-center transition-opacity hover:opacity-80">
+            <span className="text-sm font-display leading-tight text-foreground">Experience</span>
+            <span className="text-[10px] font-body tracking-wider mt-0.5 text-muted-foreground">経歴</span>
           </a>
-          <a href="#about" className="text-sm text-muted-foreground hover:text-foreground transition-colors font-display">
-            About
+          <a href="#about" className="group flex flex-col items-center transition-opacity hover:opacity-80">
+            <span className="text-sm font-display leading-tight text-foreground">About</span>
+            <span className="text-[10px] font-body tracking-wider mt-0.5 text-muted-foreground">私について</span>
           </a>
-          <Link
-            to="/admin"
-            className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
-          >
-            <Settings size={18} />
-          </Link>
         </div>
 
         {/* Mobile toggle */}
@@ -50,11 +47,18 @@ const Navbar = () => {
             className="md:hidden border-t border-border overflow-hidden"
           >
             <div className="container py-4 flex flex-col gap-3">
-              <a href="#projects" onClick={() => setMobileOpen(false)} className="text-sm font-display py-2">Projects</a>
-              <a href="#about" onClick={() => setMobileOpen(false)} className="text-sm font-display py-2">About</a>
-              <Link to="/admin" onClick={() => setMobileOpen(false)} className="text-sm font-display py-2 flex items-center gap-2">
-                <Settings size={16} /> 管理画面
-              </Link>
+              <a href="#projects" onClick={() => setMobileOpen(false)} className="flex flex-col py-2">
+                <span className="text-sm font-display leading-tight text-foreground">Projects</span>
+                <span className="text-[10px] text-muted-foreground tracking-wider mt-0.5">制作実績</span>
+              </a>
+              <a href="#experience" onClick={() => setMobileOpen(false)} className="flex flex-col py-2">
+                <span className="text-sm font-display leading-tight text-foreground">Experience</span>
+                <span className="text-[10px] text-muted-foreground tracking-wider mt-0.5">経歴</span>
+              </a>
+              <a href="#about" onClick={() => setMobileOpen(false)} className="flex flex-col py-2">
+                <span className="text-sm font-display leading-tight text-foreground">About</span>
+                <span className="text-[10px] text-muted-foreground tracking-wider mt-0.5">私について</span>
+              </a>
             </div>
           </motion.div>
         )}

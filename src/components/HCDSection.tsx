@@ -239,9 +239,9 @@ const processes = [
     description: "課題解決のためのアイデアを視覚化し、素早く操作可能なプロトタイプを作成して仮説を形にします。",
     Visual: VisualPrototype,
     details: {
-      overview: "定義した要件を具体的なインターフェースへと具現化します。手描きのスケッチ（Low-Fi）から始まり、最終的には実際の動きを確認できる高忠実度（High-Fi）のプロトタイプまで昇華させます。",
+      overview: "要件定義に基づき、ユーザーが直感的に操作できるインターフェースへと視覚化します。ワイヤーフレームによる情報設計から始まり、実際の操作感やインタラクションを検証可能な高忠実度（High-Fi）のプロトタイプまで構築します。",
       methods: ["ワイヤーフレーム作成", "UIデザイン（表層設計）", "インタラクション設計", "ユーザビリティレビュー"],
-      outputs: ["ペーパープロトタイプ", "ワイヤーフレーム", "モックアップ", "クリッカブルプロトタイプ（Figma/Protopie）"],
+      outputs: ["ワイヤーフレーム", "UIモックアップ", "UIコンポーネント", "クリッカブルプロトタイプ（Figma）"],
     }
   },
   {
@@ -353,8 +353,8 @@ const ProcessCard = ({
                   </h4>
                   <ul className="space-y-1">
                     {process.details.methods.map((method, idx) => (
-                      <li key={idx} className="text-muted-foreground flex items-center gap-2 before:content-[''] before:w-1 before:h-1 before:rounded-full before:bg-muted-foreground/30">
-                        {method}
+                      <li key={idx} className="text-muted-foreground flex items-start gap-2 before:content-[''] before:w-1.5 before:h-1.5 before:rounded-full before:bg-muted-foreground/40 before:mt-[7px] before:shrink-0">
+                        <span>{method}</span>
                       </li>
                     ))}
                   </ul>
@@ -366,8 +366,8 @@ const ProcessCard = ({
                   </h4>
                   <ul className="space-y-1">
                     {process.details.outputs.map((output, idx) => (
-                      <li key={idx} className="text-muted-foreground flex items-center gap-2 before:content-[''] before:w-1 before:h-1 before:rounded-full before:bg-muted-foreground/30">
-                        {output}
+                      <li key={idx} className="text-muted-foreground flex items-start gap-2 before:content-[''] before:w-1.5 before:h-1.5 before:rounded-full before:bg-muted-foreground/40 before:mt-[7px] before:shrink-0">
+                        <span>{output}</span>
                       </li>
                     ))}
                   </ul>

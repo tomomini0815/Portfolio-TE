@@ -119,6 +119,11 @@
     animation: shimmer 4s infinite linear;
     display: inline-block;
   }
+
+  .render-crisp {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
 }
 
 @keyframes shimmer {
