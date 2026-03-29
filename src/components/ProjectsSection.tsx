@@ -36,7 +36,7 @@ const ProjectsSection = ({ projects }: ProjectsSectionProps) => {
             <p className="text-primary text-xs font-display font-medium tracking-[0.3em] uppercase mb-4">
               Projects
             </p>
-            <TextReveal className="font-display text-4xl md:text-5xl font-bold" wordMode={false}>
+            <TextReveal className="font-display text-[26px] sm:text-4xl md:text-5xl font-bold whitespace-nowrap" wordMode={false}>
               個人開発プロジェクト
             </TextReveal>
             <motion.p

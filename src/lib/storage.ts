@@ -27,7 +27,7 @@ export interface Experience {
 }
 
 const STORAGE_KEY = 'portfolio_projects_v22';
-const EXP_STORAGE_KEY = 'portfolio_experiences_v21';
+const EXP_STORAGE_KEY = 'portfolio_experiences_v23';
 
 const defaultProjects: Project[] = [
   {
@@ -156,7 +156,7 @@ const defaultExperiences: Experience[] = [
     description: '覆面調査ダッシュボードの全面改修・新規機能追加・レスポンシブ化を担当。既存のPC向けダッシュボードを分析し、モバイル利用時の課題を整理。ユーザーが直感的に操作できるよう、プライバシーや情報の優先度を考慮したUIプロトタイプとデザインシステムを構築。',
     overview: '既存システムの課題分析からレスポンシブUIへの刷新、一元管理を可能にするデザインシステムの構築。',
     team: '役員:2名、開発リーダー:1名、営業:1名、プログラマー:1名、デザイナー:1名(私)',
-    tags: ['Figma', 'UI/UX設計', 'デザインシステム', 'SpreadSheet'],
+    tags: ['Figma', 'UI/UX設計', 'デザインシステム', 'プロトタイプ作成', 'レスポンシブ'],
     images: [
       '/experiences/projects/project1_1.png',
       '/experiences/projects/project1_2.png',
@@ -174,7 +174,7 @@ const defaultExperiences: Experience[] = [
     description: '建設業界向け業務システムダッシュボードの全面改修、新規機能制作。ユーザーの行動心理を見える化して課題を洗い出し、学習コストを最小限に抑え、目的達成までのスムーズな導線設計とインタラクションを心がけました。',
     overview: '複雑な情報の可視化による意思決定の迅速化と、導線設計による習熟コストの最小化を両立。',
     team: 'PDM:1名、デザイナー:2名',
-    tags: ['Figma', 'UXリサーチ', 'ユーザビリティテスト', 'Backlog'],
+    tags: ['Figma', 'UXリサーチ', 'ユーザビリティテスト', 'Backlog', 'プロトタイプ作成', 'デザインシステム構築'],
     images: [
       '/experiences/projects/project2_4.png',
       '/experiences/projects/project2_1.png',
@@ -201,12 +201,12 @@ const defaultExperiences: Experience[] = [
   {
     id: 'exp-4',
     company: '翻訳アプリのユーザー・テナント・システムダッシュボード',
-    role: 'UI/UX設計(ディレクター)、デザイン、プロトタイプ作成',
+    role: 'UI/UX設計、デザイン、プロトタイプ作成',
     period: '2022年 - 2023年',
     description: '翻訳アプリの一般ユーザー向け新機能追加、テナント管理、システム管理ダッシュボードを制作。各権限と用途に合わせたカラー設計を導入し、視認性の高いUIと迷いなく操作できるUX設計にこだわりました。',
     overview: '3つの異なるユーザー権限に最適化した情報設計と、ミスを防ぐ明快なアクセシビリティ対応。',
     team: '開発会社社長:1名、デザイナー:1名(私)、プログラマー:2名',
-    tags: ['Figma', 'ディレクション', 'アクセシビリティ'],
+    tags: ['Figma', 'デザインシステム', 'アクセシビリティ'],
     images: [
       '/experiences/projects/project4_1.png',
       '/experiences/projects/project4_2.png'

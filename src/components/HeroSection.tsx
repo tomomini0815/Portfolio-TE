@@ -73,7 +73,7 @@ const HeroSection = () => {
         <AnimatedBackground />
       </div>
 
-      <div className="container relative z-10 pt-40 md:pt-48 pb-20 lg:py-0 min-h-screen flex items-center">
+      <div className="container relative z-10 pt-24 md:pt-48 pb-20 lg:py-0 min-h-screen flex items-center">
         <div className="relative w-full">
           {/* Main Visual: Dashboard (Absolute Background Layer) */}
           <div className="absolute right-[-20%] lg:right-[-10%] top-1/2 -translate-y-1/2 w-[120%] lg:w-[60%] h-[100%] lg:h-[120%] pointer-events-none z-0">
@@ -165,7 +165,7 @@ const HeroSection = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="text-primary font-display text-sm md:text-base font-medium tracking-[0.4em] uppercase mt-12 lg:mt-16 mb-6 lg:mb-8"
+              className="text-primary font-display text-sm md:text-base font-medium tracking-[0.4em] uppercase mt-8 lg:mt-16 mb-4 lg:mb-8"
             >
               UI/UX Designer & App Developer
             </motion.p>
@@ -193,12 +193,12 @@ const HeroSection = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 1.1 }}
-              className="flex flex-wrap gap-6 lg:gap-8"
+              className="flex flex-row gap-3 sm:gap-6 lg:gap-8"
             >
               <Magnetic strength={30}>
                 <a
                   href="#projects"
-                  className="group relative inline-flex items-center gap-2 bg-primary text-primary-foreground px-10 py-4 rounded-full font-display font-medium text-sm tracking-widest overflow-hidden shadow-xl shadow-primary/20"
+                  className="group relative inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-5 py-3 md:px-10 md:py-4 rounded-full font-display font-medium text-[11px] md:text-sm tracking-widest overflow-hidden shadow-xl shadow-primary/20"
                 >
                   <span className="relative z-10">VIEW PROJECTS</span>
                   <motion.div
@@ -211,7 +211,7 @@ const HeroSection = () => {
               <Magnetic strength={30}>
                 <a
                   href="#about"
-                  className="group relative inline-flex items-center gap-2 border border-white/10 bg-white/5 backdrop-blur-md text-foreground px-10 py-4 rounded-full font-display font-medium text-sm tracking-widest overflow-hidden hover:bg-white/10 transition-colors"
+                  className="group relative inline-flex items-center justify-center gap-2 border border-white/10 bg-white/5 backdrop-blur-md text-foreground px-5 py-3 md:px-10 md:py-4 rounded-full font-display font-medium text-[11px] md:text-sm tracking-widest overflow-hidden hover:bg-white/10 transition-colors"
                 >
                   <span className="relative z-10">ABOUT ME</span>
                 </a>
