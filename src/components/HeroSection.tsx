@@ -73,7 +73,7 @@ const HeroSection = () => {
         <AnimatedBackground />
       </div>
 
-      <div className="container relative z-10 pt-24 md:pt-48 pb-20 lg:py-0 min-h-screen flex items-center">
+      <div className="container relative z-10 pt-12 md:pt-48 pb-32 md:pb-20 lg:py-0 min-h-screen flex items-center">
         <div className="relative w-full">
           {/* Main Visual: Dashboard (Absolute Background Layer) */}
           <div className="absolute right-[-20%] lg:right-[-10%] top-1/2 -translate-y-1/2 w-[120%] lg:w-[60%] h-[100%] lg:h-[120%] pointer-events-none z-0">

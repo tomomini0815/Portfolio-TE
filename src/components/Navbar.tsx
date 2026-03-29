@@ -31,10 +31,12 @@ const Navbar = () => {
 
         {/* Mobile toggle */}
         <button
-          onClick={() => setMobileOpen(!mobileOpen)}
-          className="md:hidden p-2 text-muted-foreground"
+          onClick={(e) => { e.stopPropagation(); setMobileOpen(!mobileOpen); }}
+          className="md:hidden p-3 -mr-2 text-muted-foreground relative z-50 pointer-events-auto active:bg-white/10 rounded-full transition-colors"
+          type="button"
+          aria-label="Toggle mobile menu"
         >
-          {mobileOpen ? <X size={20} /> : <Menu size={20} />}
+          {mobileOpen ? <X size={24} className="pointer-events-none" /> : <Menu size={24} className="pointer-events-none" />}
         </button>
       </div>
 
@@ -46,16 +48,40 @@ const Navbar = () => {
             exit={{ height: 0, opacity: 0 }}
             className="md:hidden border-t border-border overflow-hidden"
           >
-            <div className="container py-4 flex flex-col gap-3">
-              <a href="#projects" onClick={() => setMobileOpen(false)} className="flex flex-col py-2">
+            <div className="container py-4 flex flex-col gap-1">
+              <a 
+                href="#projects"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setMobileOpen(false);
+                  setTimeout(() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' }), 100);
+                }}
+                className="flex flex-col py-3 px-2 rounded-md active:bg-white/10 transition-colors"
+              >
                 <span className="text-sm font-display leading-tight text-foreground">Projects</span>
                 <span className="text-[10px] text-muted-foreground tracking-wider mt-0.5">制作実績</span>
               </a>
-              <a href="#experience" onClick={() => setMobileOpen(false)} className="flex flex-col py-2">
+              <a 
+                href="#experience"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setMobileOpen(false);
+                  setTimeout(() => document.getElementById('experience')?.scrollIntoView({ behavior: 'smooth' }), 100);
+                }}
+                className="flex flex-col py-3 px-2 rounded-md active:bg-white/10 transition-colors"
+              >
                 <span className="text-sm font-display leading-tight text-foreground">Experience</span>
                 <span className="text-[10px] text-muted-foreground tracking-wider mt-0.5">経歴</span>
               </a>
-              <a href="#about" onClick={() => setMobileOpen(false)} className="flex flex-col py-2">
+              <a 
+                href="#about"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setMobileOpen(false);
+                  setTimeout(() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' }), 100);
+                }}
+                className="flex flex-col py-3 px-2 rounded-md active:bg-white/10 transition-colors"
+              >
                 <span className="text-sm font-display leading-tight text-foreground">About</span>
                 <span className="text-[10px] text-muted-foreground tracking-wider mt-0.5">私について</span>
               </a>
