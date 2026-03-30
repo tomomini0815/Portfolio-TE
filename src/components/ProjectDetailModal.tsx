@@ -91,7 +91,7 @@ const ProjectDetailModal = ({ project, isOpen, onClose }: ProjectDetailModalProp
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3 }}
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8"
+          className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 md:p-8"
           onClick={(e) => e.target === e.currentTarget && onClose()}
         >
           {/* Backdrop */}
@@ -108,25 +108,27 @@ const ProjectDetailModal = ({ project, isOpen, onClose }: ProjectDetailModalProp
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            className={`relative w-full max-w-6xl max-h-[90vh] overflow-y-auto rounded-3xl border ${border} bg-card/80 backdrop-blur-2xl shadow-2xl`}
+            className={`relative w-full max-w-6xl overflow-hidden rounded-2xl md:rounded-3xl border ${border} bg-card/80 backdrop-blur-2xl shadow-2xl`}
           >
             {/* Gradient accent */}
-            <div className={`absolute inset-0 bg-gradient-to-br ${gradient} rounded-3xl pointer-events-none`} />
+            <div className={`absolute inset-0 bg-gradient-to-br ${gradient} pointer-events-none`} />
 
             {/* Close button */}
             <motion.button
               onClick={onClose}
               whileHover={{ scale: 1.1, rotate: 90 }}
               whileTap={{ scale: 0.9 }}
-              className="absolute top-4 right-4 z-20 p-2 rounded-full bg-secondary/80 backdrop-blur-sm hover:bg-surface-hover transition-colors"
+              className="absolute top-3 right-3 md:top-4 md:right-4 z-30 p-2 rounded-full bg-secondary/80 backdrop-blur-md hover:bg-surface-hover transition-colors shadow-sm"
             >
               <X size={20} />
             </motion.button>
 
-            <div className="relative z-10 grid md:grid-cols-2 gap-0">
+            {/* Scrollable Container */}
+            <div className="relative z-10 max-h-[92vh] md:max-h-[90vh] overflow-y-auto w-full">
+              <div className="grid md:grid-cols-2 gap-0">
               {/* Left: Video / Image */}
-              <div className="p-[12px] md:p-8 flex items-center justify-center">
-                <div className="w-full rounded-2xl overflow-hidden bg-secondary/50 border border-border/50 shadow-lg relative h-[50vh] md:h-[600px]">
+              <div className="p-0 md:p-8 flex items-center justify-center">
+                <div className="w-full rounded-t-2xl md:rounded-2xl overflow-hidden bg-secondary/50 border-b md:border border-border/50 shadow-sm md:shadow-lg relative h-[250px] sm:h-[350px] md:h-[600px] flex-shrink-0">
                   {project.images.length > 0 ? (
                     project.id === 'melodymuse' ? (
                       <div className="relative w-full h-full bg-black/20">
@@ -189,7 +191,7 @@ const ProjectDetailModal = ({ project, isOpen, onClose }: ProjectDetailModalProp
               </div>
 
               {/* Right: Details */}
-              <div className="p-[12px] md:p-8 flex flex-col justify-center">
+              <div className="px-5 pt-5 pb-12 md:p-8 flex flex-col justify-center">
                 {/* Category */}
                 <motion.p
                   initial={{ opacity: 0, x: 20 }}
@@ -207,10 +209,10 @@ const ProjectDetailModal = ({ project, isOpen, onClose }: ProjectDetailModalProp
                   transition={{ delay: 0.25 }}
                 >
                   <div className="flex items-start justify-between">
-                    <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/80 flex items-baseline gap-3 flex-wrap">
+                    <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/80 flex items-baseline gap-2 md:gap-3 flex-wrap leading-tight">
                       <span>{project.title}</span>
                       {project.titleKatakana && (
-                        <span className="text-lg md:text-xl font-body font-normal text-muted-foreground mt-2 md:mt-0">
+                        <span className="text-base sm:text-lg md:text-xl font-body font-normal text-muted-foreground mt-1 md:mt-0">
                           {project.titleKatakana}
                         </span>
                       )}
@@ -284,14 +286,15 @@ const ProjectDetailModal = ({ project, isOpen, onClose }: ProjectDetailModalProp
                       href={project.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`inline-flex items-center gap-2 bg-gradient-to-r ${btnGrad} text-white px-6 py-3 rounded-full font-display font-medium text-sm tracking-wide hover:opacity-90 transition-opacity shadow-lg`}
+                      className={`inline-flex items-center justify-center gap-2 bg-gradient-to-r ${btnGrad} text-white px-6 py-3 md:py-3.5 rounded-full font-display font-medium text-sm md:text-base tracking-wide hover:opacity-90 transition-opacity shadow-lg w-full md:w-auto`}
                     >
-                      <ExternalLink size={16} />
+                      <ExternalLink size={18} />
                       サイトを見る
                     </a>
                   </motion.div>
                 )}
               </div>
+            </div>
             </div>
           </motion.div>
         </motion.div>
