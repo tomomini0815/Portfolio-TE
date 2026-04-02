@@ -223,6 +223,7 @@ const HeroSection = () => {
 
       {/* Scroll indicator - Refined */}
       <motion.div
+        data-pdf-hide
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5, duration: 1 }}

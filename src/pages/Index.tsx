@@ -18,7 +18,7 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div id="portfolio-content" className="min-h-screen bg-background">
       <Navbar />
       <HeroSection />
       <HCDSection />

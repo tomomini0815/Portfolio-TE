@@ -157,7 +157,7 @@ const ExperienceSection = ({ experiences }: ExperienceSectionProps) => {
                         {/* RIGHT: Text Content */}
                         <div className="flex-grow min-w-0 flex flex-col pt-2">
                           <div className="flex items-center gap-3 mb-3 md:mb-4">
-                            <span className="text-[10px] px-3 py-1 rounded-full bg-primary/10 text-primary font-display font-bold tracking-widest uppercase border border-primary/20">
+                            <span className="text-[10px] px-3 py-1 rounded-full bg-primary/10 text-primary font-display font-bold tracking-widest uppercase border border-primary/20 leading-relaxed text-center">
                               {exp.period}
                             </span>
                           </div>

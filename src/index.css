@@ -134,3 +134,95 @@
     background-position: -200% 0;
   }
 }
+
+/* ─── Print / PDF Styles ───────────────────────────────────────────────────── */
+@media print {
+  /* Force color accuracy */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* ★ KEY FIX: Force ALL elements visible regardless of Framer Motion state.
+     Framer Motion sets opacity/transform via inline style, so we must use
+     higher specificity or override inline styles via the [style] attribute selector. */
+  *,
+  *::before,
+  *::after {
+    opacity: 1 !important;
+    transform: none !important;
+    visibility: visible !important;
+    animation: none !important;
+    transition: none !important;
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+  }
+
+  /* ★ TextReveal fix: character wrapper spans have overflow:hidden which clips
+     text that hasn't animated into view yet. Force overflow visible for print. */
+  * {
+    overflow: visible !important;
+  }
+
+  /* But keep overflow hidden only on elements that need it for layout */
+  img, video {
+    overflow: hidden !important;
+  }
+
+  /* Hide navigation bar */
+  nav {
+    display: none !important;
+  }
+
+  /* Hide scroll indicator and other print-excluded elements */
+  [data-pdf-hide] {
+    display: none !important;
+  }
+
+  /* Background colors */
+  html, body {
+    background-color: hsl(240, 6%, 7%) !important;
+    color: hsl(45, 30%, 92%) !important;
+  }
+
+  body {
+    padding-top: 0 !important;
+  }
+
+  /* Compress hero section height for print */
+  section:first-of-type {
+    min-height: 0 !important;
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+  }
+
+  /* Make background orbs/blurs invisible (they're aesthetic only) */
+  section:first-of-type > div:first-child,
+  .pointer-events-none {
+    display: none !important;
+  }
+
+  /* Ensure text is high contrast */
+  .text-muted-foreground {
+    color: hsl(45, 20%, 65%) !important;
+  }
+
+  /* Remove blur effects that don't print well */
+  .blur-\[120px\], .blur-\[100px\], .blur-\[150px\] {
+    filter: none !important;
+  }
+
+  /* Avoid page breaks inside cards and sections */
+  section,
+  .card-shadow,
+  .surface-elevated {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* Page size */
+  @page {
+    size: A4 portrait;
+    margin: 12mm 10mm;
+  }
+}
