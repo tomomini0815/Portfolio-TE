@@ -26,8 +26,8 @@ export interface Experience {
   createdAt: string;
 }
 
-const STORAGE_KEY = 'portfolio_projects_v22';
-const EXP_STORAGE_KEY = 'portfolio_experiences_v26';
+const STORAGE_KEY = 'portfolio_projects_v23';
+const EXP_STORAGE_KEY = 'portfolio_experiences_v28';
 
 const defaultProjects: Project[] = [
   {
@@ -63,7 +63,7 @@ const defaultProjects: Project[] = [
     highlights: [
       'リッチテキスト & 音声ジャーナル',
       'AI感情パターン分析',
-      'マインドマップ自動生成',
+      'マインドマップ生成で思考を可視化',
       '目標・タスク・プロジェクト管理',
       'ガントチャート風タイムラインビュー',
       'ビジョンボード & 未来への手紙',
@@ -153,7 +153,7 @@ const defaultExperiences: Experience[] = [
     company: '覆面調査ダッシュボードのレスポンシブ化',
     role: 'UI/UX設計、Web/スマホアプリデザイン、デザインシステム構築、プロトタイプ作成',
     period: '2025年8月 - 2026年3月 (約8ヵ月)',
-    description: '覆面調査ダッシュボードの全面改修・新規機能追加・レスポンシブ化を担当。既存のPC向けダッシュボードを分析し、モバイル利用時の課題を整理。ユーザーが直感的に操作できるよう、プライバシーや情報の優先度を考慮したUIプロトタイプとデザインシステムを構築。',
+    description: '覆面調査ダッシュボードの全面改修・新規機能追加・レスポンシブ化を担当。既存のPC向けダッシュボードを分析し、モバイル利用時の課題を整理。情報の階層構造をモバイル向けに再定義し、思考を妨げない直感的なインターフェースを実現。拡張性を担保するデザインシステムを構築し、高精度なプロトタイプでUXの最適解を提示。',
     overview: '既存システムの課題分析からレスポンシブUIへの刷新、一元管理を可能にするデザインシステムの構築。',
     team: '役員:2名、開発リーダー:1名、営業:1名、プログラマー:1名、デザイナー:1名(私)',
     tags: ['Figma', 'UI/UX設計', 'デザインシステム', 'プロトタイプ作成', 'レスポンシブ'],
@@ -169,11 +169,11 @@ const defaultExperiences: Experience[] = [
   {
     id: 'exp-2',
     company: '建設業界向け SaaS のダッシュボード',
-    role: 'UI/UX設計、Web/スマホアプリデザイン、プロトタイプ作成',
+    role: 'UI/UX設計、Web/スマホアプリデザイン、プロトタイプ作成、デザインシステム構築',
     period: '2024年6月 - 2025年7月 (約1年2ヵ月)',
     description: '建設業界向け業務システムダッシュボードの全面改修、新規機能制作。ユーザーの行動心理を見える化して課題を洗い出し、学習コストを最小限に抑え、目的達成までのスムーズな導線設計とインタラクションを心がけました。',
     overview: '複雑な情報の可視化による意思決定の迅速化と、導線設計による習熟コストの最小化を両立。',
-    team: 'PDM:1名、チームリーダー:1名、デザイナー:2名',
+    team: 'PM:1名、チームリーダー:1名、デザイナー:2名',
     tags: ['Figma', 'UXリサーチ', 'ユーザビリティテスト', 'Backlog', 'プロトタイプ作成', 'デザインシステム構築'],
     images: [
       '/experiences/projects/project2_4.png',

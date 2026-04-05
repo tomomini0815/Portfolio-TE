@@ -46,7 +46,7 @@ const ProjectsSection = ({ projects }: ProjectsSectionProps) => {
               transition={{ delay: 0.3, duration: 0.6 }}
               className="text-muted-foreground text-base mt-4 max-w-2xl font-body"
             >
-              AI技術を活用した実用的なWebアプリケーションを個人で設計・開発・運用しています
+              AI技術を活用した実用的なWebアプリケーションの設計・開発に取り組んでいます
             </motion.p>
           </motion.div>
 

@@ -136,7 +136,7 @@ const ExperienceManager = () => {
                     onChange={e => setEditing({ ...editing, team: e.target.value })}
                     rows={2}
                     className="w-full bg-secondary rounded-lg px-4 py-2.5 text-sm font-body focus:outline-none focus:ring-2 focus:ring-primary resize-none"
-                    placeholder="制作体制（PDM:1名など）"
+                    placeholder="制作体制（PM:1名など）"
                   />
                 </div>
               </div>

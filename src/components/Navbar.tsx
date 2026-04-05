@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Loader2, FileSpreadsheet } from "lucide-react";
+import { Menu, X, Loader2, Download } from "lucide-react";
 import { useExcelDownload } from "@/hooks/useExcelDownload";
 
 const Navbar = () => {
@@ -29,17 +29,17 @@ const Navbar = () => {
             <span className="text-[10px] font-body tracking-wider mt-0.5 text-muted-foreground">私について</span>
           </a>
 
-          {/* Excel Download button – desktop */}
+          {/* Excel Download button – desktop (Elite Premium Style) */}
           <motion.button
             onClick={downloadExcel}
             disabled={isExporting}
             whileHover={{ scale: isExporting ? 1 : 1.05 }}
             whileTap={{ scale: isExporting ? 1 : 0.97 }}
-            className="relative inline-flex items-center gap-2 bg-primary text-primary-foreground px-4 py-2 rounded-full font-display font-medium text-xs tracking-widest shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-shadow disabled:opacity-60 disabled:cursor-not-allowed overflow-hidden"
+            className="relative inline-flex items-center gap-2 bg-white text-slate-900 px-4 py-2 rounded-full font-display font-medium text-xs tracking-tight shadow-[0_0_20px_-5px_rgba(245,158,11,0.3)] hover:shadow-[0_0_25px_-5px_rgba(245,158,11,0.5)] transition-all disabled:opacity-60 disabled:cursor-not-allowed overflow-hidden"
             aria-label="Download Excel"
           >
             <motion.span
-              className="absolute inset-0 bg-white/15"
+              className="absolute inset-0 bg-primary/5"
               initial={{ x: "-100%" }}
               whileHover={{ x: "100%" }}
               transition={{ duration: 0.5 }}
@@ -47,9 +47,9 @@ const Navbar = () => {
             {isExporting ? (
               <Loader2 size={14} className="animate-spin relative z-10" />
             ) : (
-              <FileSpreadsheet size={14} className="relative z-10" />
+              <Download size={14} className="relative z-10" />
             )}
-            <span className="relative z-10">{isExporting ? "生成中..." : "Excel保存"}</span>
+            <span className="relative z-10">{isExporting ? "生成中..." : "スキルシート（Excel）"}</span>
           </motion.button>
         </div>
 
@@ -110,18 +110,18 @@ const Navbar = () => {
                 <span className="text-[10px] text-muted-foreground tracking-wider mt-0.5">私について</span>
               </a>
 
-              {/* Excel Download button – mobile */}
+              {/* Excel Download button – mobile (Elite Premium Style) */}
               <button
                 onClick={() => { setMobileOpen(false); downloadExcel(); }}
                 disabled={isExporting}
-                className="mt-2 flex items-center gap-2 bg-primary text-primary-foreground px-4 py-3 rounded-xl font-display font-medium text-sm tracking-widest shadow-lg shadow-primary/20 disabled:opacity-60 disabled:cursor-not-allowed w-full justify-center"
+                className="mt-2 flex items-center justify-center gap-2 bg-white text-slate-900 px-4 py-3 rounded-xl font-display font-medium text-sm tracking-tight shadow-[0_0_20px_-5px_rgba(245,158,11,0.3)] disabled:opacity-60 disabled:cursor-not-allowed w-full"
               >
                 {isExporting ? (
                   <Loader2 size={16} className="animate-spin" />
                 ) : (
-                  <FileSpreadsheet size={16} />
+                  <Download size={16} />
                 )}
-                {isExporting ? "生成中..." : "Excelをダウンロード"}
+                {isExporting ? "生成中..." : "スキルシート（Excel）"}
               </button>
             </div>
           </motion.div>

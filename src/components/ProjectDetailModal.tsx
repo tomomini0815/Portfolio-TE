@@ -281,6 +281,7 @@ const ProjectDetailModal = ({ project, isOpen, onClose }: ProjectDetailModalProp
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.55 }}
+                    className="flex md:justify-end"
                   >
                     <a
                       href={project.link}
