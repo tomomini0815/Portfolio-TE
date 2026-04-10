@@ -47,8 +47,8 @@ const ExperienceSection = ({ experiences }: ExperienceSectionProps) => {
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             className="mb-16"
           >
-            <p className="text-primary text-xs font-display font-medium tracking-[0.3em] uppercase mb-4">
-              Experience <span className="text-primary/90 ml-2 font-bold tracking-normal text-sm lowercase leading-none">| 2021 — 2026</span>
+            <p className="text-yellow-400 text-xs font-display font-bold tracking-[0.3em] uppercase mb-4">
+              Experience <span className="text-yellow-400/80 ml-2 font-bold tracking-normal text-sm lowercase leading-none">| 2021 — 2026</span>
             </p>
             <div className="flex flex-col md:flex-row md:items-baseline gap-4">
               <TextReveal className="font-display text-4xl md:text-5xl font-bold" wordMode={false}>

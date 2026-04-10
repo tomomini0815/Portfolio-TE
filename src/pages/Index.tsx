@@ -7,6 +7,7 @@ import ProjectsSection from "@/components/ProjectsSection";
 import ExperienceSection from "@/components/ExperienceSection";
 import AboutSection from "@/components/AboutSection";
 import Footer from "@/components/Footer";
+import DemoAppSection from "@/components/DemoAppSection";
 
 const Index = () => {
   const [projects, setProjects] = useState<Project[]>([]);
@@ -22,8 +23,9 @@ const Index = () => {
       <Navbar />
       <HeroSection />
       <HCDSection />
-      <ProjectsSection projects={projects} />
       <ExperienceSection experiences={experiences} />
+      <ProjectsSection projects={projects} />
+      <DemoAppSection />
       <AboutSection />
       <Footer />
     </div>

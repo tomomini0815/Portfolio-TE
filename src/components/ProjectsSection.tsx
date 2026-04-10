@@ -33,7 +33,7 @@ const ProjectsSection = ({ projects }: ProjectsSectionProps) => {
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             className="mb-16"
           >
-            <p className="text-primary text-xs font-display font-medium tracking-[0.3em] uppercase mb-4">
+            <p className="text-yellow-400 text-xs font-display font-bold tracking-[0.3em] uppercase mb-4">
               Projects
             </p>
             <TextReveal className="font-display text-[26px] sm:text-4xl md:text-5xl font-bold whitespace-nowrap" wordMode={false}>

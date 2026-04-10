@@ -165,7 +165,7 @@ const HeroSection = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="text-primary font-display text-sm md:text-base font-medium tracking-[0.4em] uppercase mt-8 lg:mt-16 mb-4 lg:mb-8"
+              className="text-yellow-400 font-display text-sm md:text-base font-bold tracking-[0.4em] uppercase mt-8 lg:mt-16 mb-4 lg:mb-8"
             >
               UI/UX Designer & App Developer
             </motion.p>

@@ -22,7 +22,7 @@ const AboutSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.8 }}
-              className="text-primary text-xs font-display font-medium tracking-[0.3em] uppercase mb-4"
+              className="text-yellow-400 text-xs font-display font-bold tracking-[0.3em] uppercase mb-4"
             >
               About
             </motion.p>

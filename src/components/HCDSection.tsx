@@ -396,7 +396,7 @@ const HCDSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6 }}
-            className="text-primary font-display text-sm font-medium tracking-[0.3em] uppercase mb-4"
+            className="text-yellow-400 font-display text-sm font-bold tracking-[0.3em] uppercase mb-4"
           >
             Design Philosophy
           </motion.p>
