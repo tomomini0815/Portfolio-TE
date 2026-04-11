@@ -1,28 +1,30 @@
 import { useEffect, useState } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 export const CustomCursor = () => {
+    const isMobile = useIsMobile();
     const [isHovering, setIsHovering] = useState(false);
     const [cursorText, setCursorText] = useState("");
 
     const mouseX = useMotionValue(-100);
     const mouseY = useMotionValue(-100);
 
-    // Smooth spring physics for the cursor
     const springConfig = { damping: 25, stiffness: 300, mass: 0.5 };
     const cursorX = useSpring(mouseX, springConfig);
     const cursorY = useSpring(mouseY, springConfig);
 
     useEffect(() => {
+        // モバイルではカスタムカーソルを無効化
+        if (isMobile) return;
+
         const updateMousePosition = (e: MouseEvent) => {
-            // Offset by radius (adjust based on size, we will use translate-x/y later but it's easier to set center here)
             mouseX.set(e.clientX);
             mouseY.set(e.clientY);
         };
 
         const handleMouseOver = (e: MouseEvent) => {
             const target = e.target as HTMLElement;
-            // Look for a tags, buttons, or custom data-cursor
             const interactable = target.closest("a, button, [data-cursor-text]");
 
             if (interactable) {
@@ -42,7 +44,10 @@ export const CustomCursor = () => {
             window.removeEventListener("pointermove", updateMousePosition);
             window.removeEventListener("mouseover", handleMouseOver);
         };
-    }, [mouseX, mouseY]);
+    }, [mouseX, mouseY, isMobile]);
+
+    // モバイルでは何もレンダリングしない
+    if (isMobile) return null;
 
     return (
         <motion.div

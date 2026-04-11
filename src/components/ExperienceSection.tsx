@@ -1,9 +1,10 @@
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
-import { useState, useRef } from "react";
+import { motion, useScroll, useTransform, useMotionValue, useSpring, AnimatePresence } from "framer-motion";
+import { useState, useRef, useEffect } from "react";
 import type { Experience } from "@/lib/storage";
 import ImageLightbox from "./ImageLightbox";
 import { TextReveal } from "./animations/TextReveal";
 import { ChevronDown } from "lucide-react";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 interface ExperienceSectionProps {
   experiences: Experience[];
@@ -12,24 +13,47 @@ interface ExperienceSectionProps {
 const ExperienceSection = ({ experiences }: ExperienceSectionProps) => {
   const [lightbox, setLightbox] = useState<{ images: string[]; index: number } | null>(null);
   const [expandedId, setExpandedId] = useState<string | null>(null);
+  const isMobile = useIsMobile();
   
-  const sectionRef = useRef(null);
-  const timelineRef = useRef(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const timelineRef = useRef<HTMLDivElement>(null);
 
-  // Background opacity scroll progress
+  // Background opacity scroll progress (usingframer-motion for this one is fine)
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"],
   });
-
-  // Vertical line scroll progress - targeted specifically to the timeline container
-  const { scrollYProgress: lineProgress } = useScroll({
-    target: timelineRef,
-    offset: ["start 80%", "end 50%"],
-  });
-
-  const lineHeight = useTransform(lineProgress, [0, 1], ["0%", "100%"]);
   const backgroundOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [0, 0.3, 0]);
+
+  // Lenis-compatible scroll tracking: listen directly to native scroll events
+  const rawLineProgress = useMotionValue(0);
+  // モバイルではスプリングをよりタイトに（遅延を減らす）
+  const smoothLineProgress = useSpring(rawLineProgress, 
+    isMobile 
+      ? { stiffness: 200, damping: 40, restDelta: 0.001 }
+      : { stiffness: 100, damping: 30, restDelta: 0.001 }
+  );
+  const lineScaleY = useTransform(smoothLineProgress, [0, 1], [0, 1]);
+
+  useEffect(() => {
+    const updateProgress = () => {
+      const el = timelineRef.current;
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      const viewportH = window.innerHeight;
+      // Start when top of element is 80% down viewport, end when bottom is at 80% down viewport
+      const start = rect.top - viewportH * 0.8;
+      const end = rect.bottom - viewportH * 0.8;
+      const total = end - start;
+      if (total <= 0) return;
+      const progress = Math.min(1, Math.max(0, -start / total));
+      rawLineProgress.set(progress);
+    };
+
+    window.addEventListener("scroll", updateProgress, { passive: true });
+    updateProgress();
+    return () => window.removeEventListener("scroll", updateProgress);
+  }, [rawLineProgress]);
 
   if (experiences.length === 0) return null;
 
@@ -78,10 +102,10 @@ const ExperienceSection = ({ experiences }: ExperienceSectionProps) => {
           {/* Timeline */}
           <div ref={timelineRef} className="relative max-w-6xl mx-auto">
             {/* Vertical line - animated on scroll */}
-            <div className="absolute left-6 md:left-8 top-0 bottom-0 w-px bg-border overflow-hidden">
+            <div className="absolute left-6 md:left-8 top-4 bottom-8 w-px bg-border">
               <motion.div
-                style={{ height: lineHeight }}
-                className="w-full bg-gradient-to-b from-primary to-primary/30"
+                style={{ scaleY: lineScaleY, originY: 0 }}
+                className="w-full h-full bg-gradient-to-b from-primary to-primary/30"
               />
             </div>
 
@@ -105,7 +129,7 @@ const ExperienceSection = ({ experiences }: ExperienceSectionProps) => {
                     whileInView={{ scale: 1, opacity: 1 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: i * 0.15 }}
-                    className="absolute left-[17px] md:left-[23px] top-2 w-5 h-5 rounded-full bg-primary ring-4 ring-background"
+                    className="absolute left-[17px] md:left-[23px] top-3 w-5 h-5 rounded-full bg-primary ring-4 ring-background"
                   >
                     <motion.div
                       animate={{ scale: [1, 1.3, 1], opacity: [1, 0, 0] }}
@@ -115,7 +139,7 @@ const ExperienceSection = ({ experiences }: ExperienceSectionProps) => {
                   </motion.div>
 
                   <motion.div
-                    whileHover={{ y: -8 }}
+                    whileHover={isMobile ? undefined : { y: -8 }}
                     transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
                     className="surface-elevated rounded-2xl overflow-hidden card-shadow-lg hover:shadow-2xl transition-all duration-500 border border-white/5 hover:border-primary/20 bg-card/40 backdrop-blur-md"
                   >

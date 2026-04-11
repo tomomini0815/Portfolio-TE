@@ -1,4 +1,5 @@
 import { motion, Variants } from "framer-motion";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 interface TextRevealProps {
     children: string;
@@ -9,8 +10,23 @@ interface TextRevealProps {
 }
 
 export const TextReveal = ({ children, className = "", delay = 0, wordMode = true, highlightWord = "" }: TextRevealProps) => {
-    // Split into words to handle wrapping correctly and align perfectly
+    const isMobile = useIsMobile();
     const words = children.split(" ");
+
+    // モバイルではシンプルなフェードインに切り替え（文字ごとのアニメーションは重い）
+    if (isMobile) {
+        return (
+            <motion.h2
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-5%" }}
+                transition={{ duration: 0.5, delay, ease: [0.22, 1, 0.36, 1] }}
+                className={className}
+            >
+                {children}
+            </motion.h2>
+        );
+    }
 
     const container: Variants = {
         hidden: { opacity: 0 },
@@ -98,7 +114,6 @@ export const TextReveal = ({ children, className = "", delay = 0, wordMode = tru
                                 </motion.span>
                             </span>
                         ))}
-                        {/* Regular space that allows the browser to wrap correctly */}
                         {wIdx < words.length - 1 && (
                             <span style={{ display: "inline-block", width: "0.25em" }}>&nbsp;</span>
                         )}

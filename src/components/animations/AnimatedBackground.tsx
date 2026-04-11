@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 interface Bubble {
     id: number;
@@ -17,26 +18,29 @@ interface Bubble {
 }
 
 export const AnimatedBackground = () => {
+    const isMobile = useIsMobile();
     const [bubbles, setBubbles] = useState<Bubble[]>([]);
 
     useEffect(() => {
-        // 人間中心設計を意識し、視覚的なノイズにならないようバブルの数を抑えめに設定
-        const newBubbles = Array.from({ length: 12 }).map((_, i) => ({
+        // モバイルでは最小限のバブル数に削減
+        const count = isMobile ? 4 : 12;
+        const newBubbles = Array.from({ length: count }).map((_, i) => ({
             id: i,
-            size: Math.random() * 8 + 3, // 3vw ~ 11vw
-            top: Math.random() * 100, // 0% ~ 100%
-            left: Math.random() * 100, // 0% ~ 100%
-            duration: Math.random() * 20 + 30, // 30s ~ 50s (よりゆっくり動かす)
+            size: Math.random() * 8 + 3,
+            top: Math.random() * 100,
+            left: Math.random() * 100,
+            // モバイルでは動きを遅くしてCPU負荷を下げる
+            duration: isMobile ? Math.random() * 20 + 50 : Math.random() * 20 + 30,
             delay: Math.random() * 5,
-            xMove1: (Math.random() - 0.5) * 60,
-            yMove1: (Math.random() - 0.5) * 60,
-            xMove2: (Math.random() - 0.5) * 60,
-            yMove2: (Math.random() - 0.5) * 60,
-            opacity: Math.random() * 0.3 + 0.1, // 0.1 ~ 0.4
-            intensity: Math.random() * 0.4 + 0.3, // 0.3 ~ 0.7
+            xMove1: (Math.random() - 0.5) * (isMobile ? 30 : 60),
+            yMove1: (Math.random() - 0.5) * (isMobile ? 30 : 60),
+            xMove2: (Math.random() - 0.5) * (isMobile ? 30 : 60),
+            yMove2: (Math.random() - 0.5) * (isMobile ? 30 : 60),
+            opacity: Math.random() * 0.3 + 0.1,
+            intensity: Math.random() * 0.4 + 0.3,
         }));
         setBubbles(newBubbles);
-    }, []);
+    }, [isMobile]);
 
     return (
         <div className="absolute inset-0 overflow-hidden pointer-events-none bg-background">
@@ -51,7 +55,7 @@ export const AnimatedBackground = () => {
                     right: "-5%",
                     background: "radial-gradient(circle at 30% 30%, hsl(var(--primary) / 0.8), transparent 70%)",
                 }}
-                animate={{
+                animate={isMobile ? {} : {
                     y: [0, -40, 20, 0],
                     x: [0, 30, -10, 0],
                     scale: [1, 1.05, 0.95, 1],
@@ -71,7 +75,7 @@ export const AnimatedBackground = () => {
                     left: "-10%",
                     background: "radial-gradient(circle at 30% 30%, hsl(var(--primary) / 0.6), transparent 70%)",
                 }}
-                animate={{
+                animate={isMobile ? {} : {
                     y: [0, 50, -20, 0],
                     x: [0, -30, 40, 0],
                     scale: [1, 1.1, 0.9, 1],
@@ -84,7 +88,7 @@ export const AnimatedBackground = () => {
                 }}
             />
 
-            {/* Random Floating Bubbles */}
+            {/* Random Floating Bubbles - モバイルでは数を絞って動きも控えめに */}
             {bubbles.map((bubble) => (
                 <motion.div
                     key={bubble.id}
@@ -99,7 +103,7 @@ export const AnimatedBackground = () => {
                         background: `radial-gradient(circle at 30% 30%, hsl(var(--primary) / ${bubble.intensity}), transparent 70%)`,
                         opacity: bubble.opacity,
                     }}
-                    animate={{
+                    animate={isMobile ? {} : {
                         y: [0, bubble.yMove1, bubble.yMove2, 0],
                         x: [0, bubble.xMove1, bubble.xMove2, 0],
                         scale: [1, 1.1, 0.9, 1],
@@ -113,6 +117,6 @@ export const AnimatedBackground = () => {
                 />
             ))}
 
-            </div>
+        </div>
     );
 };
