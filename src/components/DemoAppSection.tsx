@@ -74,28 +74,25 @@ const DemoAppSection = () => {
               {/* Premium Diffused Glow */}
               <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500/15 via-teal-400/15 to-emerald-500/15 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
               
-              <div className="relative bg-slate-900/90 dark:bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-4 shadow-2xl transition-all duration-300 group-hover:border-emerald-500/30">
-                <div className="flex items-start gap-4 mb-3">
-                  <div className="flex-shrink-0 flex items-center justify-center w-12 h-12 rounded-xl bg-yellow-400/20 text-yellow-400 shadow-inner">
-                    <Smartphone className="w-6 h-6 animate-bounce" />
+              <div className="relative bg-neutral-800/95 dark:bg-neutral-800/90 backdrop-blur-md border border-white/10 rounded-2xl p-5 shadow-2xl transition-all duration-300 group-hover:border-emerald-500/30">
+                <div className="flex items-center gap-5 mb-4">
+                  <div className="flex-shrink-0 flex items-center justify-center w-14 h-14 rounded-2xl bg-yellow-400/20 text-yellow-400 shadow-inner">
+                    <Smartphone className="w-7 h-7 animate-bounce" />
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="py-1">
-                      <p className="text-yellow-400 text-[10px] sm:text-xs md:text-sm font-bold tracking-widest opacity-80 mb-0.5">INSTRUCTION</p>
-                      <p className="text-white dark:text-slate-100 font-bold text-[11px] sm:text-[13px] md:text-sm tracking-tight whitespace-nowrap">
-                        スマホの画面内で<span className="text-yellow-400">スクロール・タップ</span>して操作できます
-                      </p>
-                    </div>
+                  <div className="flex-1">
+                    <p className="text-white dark:text-slate-100 font-bold text-[15px] sm:text-[17px] md:text-xl tracking-tight leading-snug">
+                      スマホの画面内で<span className="text-yellow-400 text-lg sm:text-xl md:text-2xl ml-1">スクロール・タップ</span>して操作できます
+                    </p>
                   </div>
                 </div>
                 
                 {/* Visual Separator */}
-                <div className="w-full h-px bg-gradient-to-r from-transparent via-white/5 to-transparent mb-3" />
+                <div className="w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent mb-4" />
                 
                 {/* Note Content Integrated */}
-                <div className="flex items-center gap-2.5 px-1">
-                  <div className="flex-shrink-0 flex items-center justify-center w-3.5 h-3.5 rounded-full border border-yellow-400/40 text-yellow-400 text-[9px] font-bold">!</div>
-                  <p className="text-[10px] sm:text-xs text-yellow-400/80 dark:text-yellow-400/90 leading-relaxed font-medium">
+                <div className="flex items-start gap-3 px-1">
+                  <div className="flex-shrink-0 mt-0.5 flex items-center justify-center w-4 h-4 rounded-full border border-yellow-400/50 text-yellow-400 text-[10px] font-bold">!</div>
+                  <p className="text-[12px] sm:text-[14px] text-yellow-400/90 leading-relaxed font-bold">
                     一部の主要機能のみ動作する簡易デモ版です。全体の雰囲気や操作感をご体験ください。
                   </p>
                 </div>
