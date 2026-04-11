@@ -38,14 +38,14 @@ const Footer = () => {
           transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
           className="font-display font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tight leading-[1.05] text-foreground"
         >
-          Thanks for{" "}
+          Thank you for watching{" "}
           <motion.span
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ duration: 0.6, delay: 0.5 }}
             className="relative inline-block"
           >
-            <span className="text-gradient">scrolling.</span>
+            <span className="text-gradient">to the end.</span>
             {/* アンダーライン装飾 */}
             <motion.span
               initial={{ scaleX: 0 }}
