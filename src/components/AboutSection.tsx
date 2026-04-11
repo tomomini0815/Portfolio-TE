@@ -6,6 +6,7 @@ const AboutSection = () => {
     { label: 'Design Tools', items: ['Figma', 'Adobe XD', 'Photoshop', 'Illustrator'] },
     { label: 'Web & App Design', items: ['Web App UI/UX', 'Mobile App UI/UX', 'Prototyping', 'Design System'] },
     { label: 'Frontend / CMS', items: ['HTML / CSS / JS (基礎知識)', 'WordPress', 'Git / GitHub'] },
+    { label: 'Other Tools / AI', items: ['Notion / Miro', 'Slack / Chatwork', 'GoogleMeet / Zoom', '各種AIツール'] },
     { 
       label: 'Mindset / 大切にしていること', 
       items: [
@@ -152,7 +153,7 @@ const AboutSection = () => {
           </div>
 
           {/* Other Skills - Even slimmer and tighter bottom spacing */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {skills.filter(s => !s.label.includes('Mindset')).map((skill, i) => (
               <motion.div
                 key={skill.label}

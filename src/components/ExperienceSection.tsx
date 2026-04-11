@@ -14,12 +14,21 @@ const ExperienceSection = ({ experiences }: ExperienceSectionProps) => {
   const [expandedId, setExpandedId] = useState<string | null>(null);
   
   const sectionRef = useRef(null);
+  const timelineRef = useRef(null);
+
+  // Background opacity scroll progress
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"],
   });
 
-  const lineHeight = useTransform(scrollYProgress, [0, 0.8], ["0%", "100%"]);
+  // Vertical line scroll progress - targeted specifically to the timeline container
+  const { scrollYProgress: lineProgress } = useScroll({
+    target: timelineRef,
+    offset: ["start 80%", "end 50%"],
+  });
+
+  const lineHeight = useTransform(lineProgress, [0, 1], ["0%", "100%"]);
   const backgroundOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [0, 0.3, 0]);
 
   if (experiences.length === 0) return null;
@@ -67,7 +76,7 @@ const ExperienceSection = ({ experiences }: ExperienceSectionProps) => {
           </motion.div>
 
           {/* Timeline */}
-          <div className="relative max-w-6xl mx-auto">
+          <div ref={timelineRef} className="relative max-w-6xl mx-auto">
             {/* Vertical line - animated on scroll */}
             <div className="absolute left-6 md:left-8 top-0 bottom-0 w-px bg-border overflow-hidden">
               <motion.div
