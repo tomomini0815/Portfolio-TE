@@ -163,7 +163,7 @@ const defaultExperiences: Experience[] = [
     company: '覆面調査ダッシュボードのレスポンシブ化',
     role: 'UI/UX設計、Web/スマホアプリデザイン、デザインシステム構築、プロトタイプ作成',
     period: '2025年8月 - 2026年3月 (約8ヵ月)',
-    description: '覆面調査ダッシュボードの全面改修・新規機能追加・レスポンシブ化を担当。既存のPC向けダッシュボードを分析し、モバイル利用時の課題を整理。情報の階層構造をモバイル向けに再定義し、思考を妨げない直感的なインターフェースを実現。拡張性を担保するデザインシステムを構築し、高精度なプロトタイプでUXの最適解を提示。',
+    description: '覆面調査ダッシュボードの改修・新規機能追加・レスポンシブ化を担当。既存のPC向けダッシュボードを分析し、モバイル利用時の課題を整理。情報の階層構造をモバイル向けに再定義し、思考を妨げない直感的なインターフェースを実現。拡張性を担保するデザインシステムを構築し、高精度なプロトタイプでUXの最適解を提示。',
     overview: '既存システムの課題分析からレスポンシブUIへの刷新、一元管理を可能にするデザインシステムの構築。',
     team: '役員:2名、開発リーダー:1名、営業:1名、プログラマー:1名、デザイナー:1名(私)',
     challenges: [
@@ -334,8 +334,15 @@ export function getExperiences(): Experience[] {
     const hasGeneratedLegacyCopy = legacyLead
       ? experience.improvements?.[0]?.startsWith(legacyLead)
       : false;
+    const description = experience.id === 'exp-1'
+      ? experience.description.replace(
+          '覆面調査ダッシュボードの全面改修・新規機能追加・レスポンシブ化を担当。',
+          '覆面調査ダッシュボードの改修・新規機能追加・レスポンシブ化を担当。',
+        )
+      : experience.description;
     return {
       ...experience,
+      description,
       challenges: experience.challenges ?? defaults.challenges,
       process: experience.process ?? defaults.process,
       improvements: !experience.improvements || hasGeneratedLegacyCopy

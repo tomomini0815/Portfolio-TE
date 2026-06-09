@@ -16,13 +16,13 @@ const Navbar = () => {
 
         {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-8">
-          <a href="#projects" className="group flex flex-col items-center transition-opacity hover:opacity-80">
-            <span className="text-sm font-display leading-tight text-foreground">Projects</span>
-            <span className="text-[10px] font-body tracking-wider mt-0.5 text-muted-foreground">制作実績</span>
-          </a>
           <a href="#experience" className="group flex flex-col items-center transition-opacity hover:opacity-80">
             <span className="text-sm font-display leading-tight text-foreground">Experience</span>
             <span className="text-[10px] font-body tracking-wider mt-0.5 text-muted-foreground">経歴</span>
+          </a>
+          <a href="#projects" className="group flex flex-col items-center transition-opacity hover:opacity-80">
+            <span className="text-sm font-display leading-tight text-foreground">Projects</span>
+            <span className="text-[10px] font-body tracking-wider mt-0.5 text-muted-foreground">自主制作</span>
           </a>
           <a href="#about" className="group flex flex-col items-center transition-opacity hover:opacity-80">
             <span className="text-sm font-display leading-tight text-foreground">About</span>
@@ -74,18 +74,6 @@ const Navbar = () => {
           >
             <div className="container py-4 flex flex-col gap-1">
               <a 
-                href="#projects"
-                onClick={(e) => {
-                  e.preventDefault();
-                  setMobileOpen(false);
-                  setTimeout(() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' }), 100);
-                }}
-                className="flex flex-col py-3 px-2 rounded-md active:bg-white/10 transition-colors"
-              >
-                <span className="text-sm font-display leading-tight text-foreground">Projects</span>
-                <span className="text-[10px] text-muted-foreground tracking-wider mt-0.5">制作実績</span>
-              </a>
-              <a 
                 href="#experience"
                 onClick={(e) => {
                   e.preventDefault();
@@ -96,6 +84,18 @@ const Navbar = () => {
               >
                 <span className="text-sm font-display leading-tight text-foreground">Experience</span>
                 <span className="text-[10px] text-muted-foreground tracking-wider mt-0.5">経歴</span>
+              </a>
+              <a 
+                href="#projects"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setMobileOpen(false);
+                  setTimeout(() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' }), 100);
+                }}
+                className="flex flex-col py-3 px-2 rounded-md active:bg-white/10 transition-colors"
+              >
+                <span className="text-sm font-display leading-tight text-foreground">Projects</span>
+                <span className="text-[10px] text-muted-foreground tracking-wider mt-0.5">自主制作</span>
               </a>
               <a 
                 href="#about"

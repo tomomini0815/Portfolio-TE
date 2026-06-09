@@ -3,7 +3,7 @@ import { TextReveal } from "./animations/TextReveal";
 
 const AboutSection = () => {
   const skills = [
-    { label: 'Design Tools', items: ['Figma', 'Adobe XD', 'Photoshop', 'Illustrator'] },
+    { label: 'Design Tools', items: ['Figma/Figma Make', 'Adobe XD', 'Photoshop', 'Illustrator'] },
     { label: 'Web & App Design', items: ['Web App UI/UX', 'Mobile App UI/UX', 'Prototyping', 'Design System'] },
     { label: 'Frontend / CMS', items: ['HTML / CSS / JS (基礎知識)', 'WordPress', 'Git / GitHub'] },
     { label: 'Other Tools / AI', items: ['Notion / Miro', 'Slack / Chatwork', 'GoogleMeet / Zoom', '各種AIツール'] },
