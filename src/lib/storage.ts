@@ -6,6 +6,7 @@ export interface Project {
   category: string;
   tags: string[];
   images: string[];
+  thumbnail?: string;
   link?: string;
   demoVideo?: string;
   highlights?: string[];
@@ -40,6 +41,26 @@ const LEGACY_IMPROVEMENT_LEADS: Record<string, string> = {
 };
 
 const defaultProjects: Project[] = [
+  {
+    id: 'stock-scout-hub',
+    title: '株Navi',
+    titleKatakana: 'カブナビ',
+    description: '日本株の市況、スクリーニング、銘柄チャート、ランキング、決算・IPO、ニュースを横断して確認できる株式投資の総合情報サイトです。',
+    category: 'Finance / Stock Market',
+    tags: ['React', 'TypeScript', 'Vite', 'Stock Data', 'Dashboard'],
+    images: ['/thumbnails/stock-scout-hub_scroll.png'],
+    thumbnail: '/thumbnails/stock-scout-hub_top.jpg',
+    link: 'https://stock-scout-hub.vercel.app/',
+    highlights: [
+      '主要指数・市況ダッシュボード',
+      'トレンド・需給シグナル表示',
+      'おすすめ銘柄の比較カード',
+      '銘柄チャート・ランキング確認',
+      '決算・IPO情報の整理',
+      '株式ニュースの集約',
+    ],
+    createdAt: '2026-07-02T00:00:00.000Z',
+  },
   {
     id: 'ainance',
     title: 'Ainance',
@@ -128,7 +149,30 @@ export function getProjects(): Project[] {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(defaultProjects));
     return defaultProjects;
   }
-  return JSON.parse(stored);
+  const storedProjects: Project[] = JSON.parse(stored);
+  const normalizedProjects = storedProjects.map(project => {
+    const defaultProject = defaultProjects.find(item => item.id === project.id);
+    return defaultProject
+      ? {
+          ...defaultProject,
+          ...project,
+          images: project.id === 'stock-scout-hub' ? defaultProject.images : project.images,
+          thumbnail: project.thumbnail ?? defaultProject.thumbnail,
+        }
+      : project;
+  });
+  const missingDefaultProjects = defaultProjects.filter(
+    defaultProject => !normalizedProjects.some(project => project.id === defaultProject.id)
+  );
+
+  if (missingDefaultProjects.length > 0) {
+    const mergedProjects = [...missingDefaultProjects, ...normalizedProjects];
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(mergedProjects));
+    return mergedProjects;
+  }
+
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(normalizedProjects));
+  return normalizedProjects;
 }
 
 export function saveProjects(projects: Project[]): void {

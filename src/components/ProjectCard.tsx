@@ -38,6 +38,7 @@ const ProjectCard = ({ project, index, onImageClick, onOpenDetail }: ProjectCard
 
   // Project-specific accent gradients
   const cardGradients: Record<string, string> = {
+    "stock-scout-hub": "from-teal-500/10 to-lime-500/5",
     ainance: "from-indigo-500/10 to-emerald-500/5",
     journify: "from-emerald-500/10 to-cyan-500/5",
     lifebridge: "from-teal-500/10 to-emerald-500/5",
@@ -45,6 +46,7 @@ const ProjectCard = ({ project, index, onImageClick, onOpenDetail }: ProjectCard
   };
 
   const glowColors: Record<string, string> = {
+    "stock-scout-hub": "shadow-lime-500/10",
     ainance: "shadow-emerald-500/10",
     journify: "shadow-cyan-500/10",
     lifebridge: "shadow-teal-500/10",
@@ -53,6 +55,8 @@ const ProjectCard = ({ project, index, onImageClick, onOpenDetail }: ProjectCard
 
   const cardGradient = cardGradients[project.id] || "";
   const glow = glowColors[project.id] || "";
+  const previewImage = project.thumbnail ?? project.images[0];
+  const imageAreaClass = "aspect-[16/10]";
 
   return (
     <motion.article
@@ -77,12 +81,12 @@ const ProjectCard = ({ project, index, onImageClick, onOpenDetail }: ProjectCard
     >
       {/* Image area with parallax */}
       <div
-        className="aspect-[16/10] bg-secondary relative overflow-hidden"
+        className={`${imageAreaClass} bg-secondary relative overflow-hidden`}
         data-cursor-text="VIEW"
       >
         {hasImages ? (
           <motion.img
-            src={project.images[0]}
+            src={previewImage}
             alt={project.title}
             className="w-full h-full object-cover object-top render-crisp"
             style={{ 
@@ -110,20 +114,15 @@ const ProjectCard = ({ project, index, onImageClick, onOpenDetail }: ProjectCard
         )}
 
         {/* Hover overlay */}
-        <motion.div
-          className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center"
-        >
-          {project.demoVideo && (
-            <motion.div
-              initial={{ scale: 0 }}
-              whileInView={{ scale: 1 }}
-              className="opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-            >
-              <div className="w-14 h-14 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border border-white/30">
-                <Play size={24} className="text-white ml-0.5" fill="white" />
-              </div>
-            </motion.div>
-          )}
+        <motion.div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+          <motion.div
+            whileHover={{ scale: 1.08 }}
+            className="scale-90 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-300"
+          >
+            <div className="w-14 h-14 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border border-white/35 shadow-lg shadow-black/20">
+              <Play size={24} className="text-white ml-0.5" fill="white" />
+            </div>
+          </motion.div>
         </motion.div>
 
       </div>

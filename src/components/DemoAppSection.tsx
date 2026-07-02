@@ -39,7 +39,7 @@ const DemoAppSection = () => {
           >
             {/* Top Badge (Text Only) */}
             <div className="text-yellow-400 text-xs font-bold uppercase tracking-[0.3em] mb-2">
-              DEMO APP / デモアプリ
+              DEMO APP / 簡易デモアプリ
             </div>
             
             {/* Title */}

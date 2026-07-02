@@ -36,17 +36,17 @@ const ProjectsSection = ({ projects }: ProjectsSectionProps) => {
             <p className="text-yellow-400 text-xs font-display font-bold tracking-[0.3em] uppercase mb-4">
               Projects
             </p>
-            <TextReveal className="font-display text-[26px] sm:text-4xl md:text-5xl font-bold whitespace-nowrap" wordMode={false}>
-              個人開発プロジェクト
+            <TextReveal className="font-display text-[26px] sm:text-4xl md:text-5xl font-bold leading-tight" wordMode={false}>
+              自主制作・検証プロトタイプ
             </TextReveal>
             <motion.p
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.3, duration: 0.6 }}
-              className="text-muted-foreground text-base mt-4 max-w-2xl font-body"
+              className="text-muted-foreground text-lg mt-4 max-w-2xl font-body"
             >
-              AI技術を活用した実用的なWebアプリケーションの設計・開発に取り組んでいます
+              自身の課題意識を起点に、AIを活用しながらUI/UX設計・プロトタイプ作成・体験検証までを行った自主制作です。
             </motion.p>
           </motion.div>
 

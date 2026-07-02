@@ -167,7 +167,7 @@ const HeroSection = () => {
               transition={{ duration: 0.8 }}
               className="text-yellow-400 font-display text-sm md:text-base font-bold tracking-[0.4em] uppercase mt-8 lg:mt-16 mb-4 lg:mb-8"
             >
-              UI/UX Designer & App Developer
+              UI/UX Designer
             </motion.p>
   
             <TextReveal 
