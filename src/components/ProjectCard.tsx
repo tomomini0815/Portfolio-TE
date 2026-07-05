@@ -88,7 +88,9 @@ const ProjectCard = ({ project, index, onImageClick, onOpenDetail }: ProjectCard
           <motion.img
             src={previewImage}
             alt={project.title}
-            className="w-full h-full object-cover object-top render-crisp"
+            className={`w-full h-full object-top render-crisp ${
+              project.id === 'stock-scout-hub' ? 'object-contain' : 'object-cover'
+            }`}
             style={{ 
               imageRendering: '-webkit-optimize-contrast' as any,
               clipPath: project.id === 'lifebridge' ? 'inset(0 2px 0 0)' : undefined 
