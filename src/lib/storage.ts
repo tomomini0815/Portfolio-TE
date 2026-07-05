@@ -157,7 +157,8 @@ export function getProjects(): Project[] {
           ...defaultProject,
           ...project,
           images: project.id === 'stock-scout-hub' ? defaultProject.images : project.images,
-          thumbnail: project.thumbnail ?? defaultProject.thumbnail,
+          thumbnail: project.id === 'stock-scout-hub' ? defaultProject.thumbnail : project.thumbnail ?? defaultProject.thumbnail,
+          link: project.id === 'stock-scout-hub' ? defaultProject.link : project.link,
         }
       : project;
   });
