@@ -50,7 +50,7 @@ const defaultProjects: Project[] = [
     tags: ['React', 'TypeScript', 'Vite', 'Stock Data', 'Dashboard'],
     images: ['/thumbnails/stock-scout-hub_scroll.png'],
     thumbnail: '/thumbnails/stock-scout-hub_top.jpg',
-    link: 'https://stock-scout-hub.vercel.app/',
+    link: 'https://stock-scout-hub-nhis.vercel.app/',
     highlights: [
       '主要指数・市況ダッシュボード',
       'トレンド・需給シグナル表示',

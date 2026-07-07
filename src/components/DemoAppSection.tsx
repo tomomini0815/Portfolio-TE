@@ -129,7 +129,7 @@ const DemoAppSection = () => {
                   
                   {/* The actual Flutter Web app iframe */}
                   <iframe 
-                    src="https://zenliving-flutter.vercel.app/"
+                    src="https://zenliving-flutter-mu.vercel.app/"
                     className="w-full h-full border-none"
                     style={{ opacity: iframeLoaded ? 1 : 0, transition: 'opacity 0.5s ease-in-out' }}
                     onLoad={() => setIframeLoaded(true)}
