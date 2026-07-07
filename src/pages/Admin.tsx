@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Plus, Trash2, Upload, ArrowLeft, X, Image as ImageIcon } from "lucide-react";
 import { Link } from "react-router-dom";
+import { getAssetPath } from "@/lib/utils";
 import { getProjects, addProject, updateProject, deleteProject, fileToBase64, type Project } from "@/lib/storage";
 import ImageLightbox from "@/components/ImageLightbox";
 import ExperienceManager from "@/components/admin/ExperienceManager";
@@ -248,7 +249,7 @@ const AdminPage = () => {
               <div className="flex items-center gap-4 flex-1 min-w-0">
                 <div className="w-12 h-12 rounded-lg bg-secondary flex items-center justify-center flex-shrink-0 overflow-hidden">
                   {project.images[0] ? (
-                    <img src={project.images[0]} alt="" className="w-full h-full object-cover" />
+                    <img src={getAssetPath(project.images[0])} alt="" className="w-full h-full object-cover" />
                   ) : (
                     <ImageIcon size={20} className="text-muted-foreground" />
                   )}

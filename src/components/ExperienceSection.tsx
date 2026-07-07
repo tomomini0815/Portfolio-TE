@@ -2,6 +2,7 @@ import { motion, useScroll, useTransform, useMotionValue, useSpring, AnimatePres
 import { useState, useRef, useEffect } from "react";
 import type { Experience } from "@/lib/storage";
 import ImageLightbox from "./ImageLightbox";
+import { getAssetPath } from "@/lib/utils";
 import { TextReveal } from "./animations/TextReveal";
 import { ChevronDown } from "lucide-react";
 import { useIsMobile } from "@/hooks/useIsMobile";
@@ -154,7 +155,7 @@ const ExperienceSection = ({ experiences }: ExperienceSectionProps) => {
                               onClick={() => setLightbox({ images: exp.images!, index: 0 })}
                             >
                               <img 
-                                src={exp.images[0]} 
+                                src={getAssetPath(exp.images[0])} 
                                 alt={`${exp.company} Main`}
                                 className="w-full h-full object-contain transition-transform duration-700 group-hover/main:scale-105"
                               />
@@ -176,7 +177,7 @@ const ExperienceSection = ({ experiences }: ExperienceSectionProps) => {
                                   onClick={() => setLightbox({ images: exp.images!, index: idx + 1 })}
                                 >
                                   <img 
-                                    src={img} 
+                                    src={getAssetPath(img)} 
                                     alt={`${exp.company} Thumbnail ${idx + 1}`}
                                     className="w-full h-full object-cover opacity-60 group-hover/thumb:opacity-100 transition-opacity"
                                   />

@@ -2,6 +2,7 @@ import { motion, useMotionValue, useTransform } from "framer-motion";
 import { useRef, useState } from "react";
 import type { Project } from "@/lib/storage";
 import { ExternalLink, Play } from "lucide-react";
+import { getAssetPath } from "@/lib/utils";
 
 interface ProjectCardProps {
   project: Project;
@@ -86,7 +87,7 @@ const ProjectCard = ({ project, index, onImageClick, onOpenDetail }: ProjectCard
       >
         {hasImages ? (
           <motion.img
-            src={previewImage}
+            src={getAssetPath(previewImage)}
             alt={project.title}
             className={`w-full h-full object-top render-crisp ${
               project.id === 'stock-scout-hub' ? 'object-contain' : 'object-cover'

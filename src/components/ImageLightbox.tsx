@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight, ZoomIn, ZoomOut, RotateCcw } from "lucide-react";
 import { useState, useCallback, useRef, useEffect } from "react";
+import { getAssetPath } from "@/lib/utils";
 
 interface ImageLightboxProps {
   images: string[];
@@ -154,7 +155,7 @@ const ImageLightbox = ({ images, currentIndex, isOpen, onClose }: ImageLightboxP
                 x: position.x,
                 y: position.y
               }}
-              src={images[index]}
+              src={getAssetPath(images[index])}
               alt=""
               className="max-w-full max-h-[85vh] object-contain select-none"
               transition={isDragging ? { duration: 0 } : { duration: 0.3, ease: [0.22, 1, 0.36, 1] }}

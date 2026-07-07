@@ -2,6 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, ExternalLink, Sparkles, Play } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import type { Project } from "@/lib/storage";
+import { getAssetPath } from "@/lib/utils";
 
 interface ProjectDetailModalProps {
   project: Project | null;
@@ -144,7 +145,7 @@ const ProjectDetailModal = ({ project, isOpen, onClose }: ProjectDetailModalProp
                         <AnimatePresence>
                           <motion.img
                             key={currentImageIndex}
-                            src={project.images[currentImageIndex]}
+                            src={getAssetPath(project.images[currentImageIndex])}
                             alt={`${project.title} screenshot ${currentImageIndex}`}
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
@@ -169,7 +170,7 @@ const ProjectDetailModal = ({ project, isOpen, onClose }: ProjectDetailModalProp
                         {[...project.images, ...project.images].map((img, idx) => (
                           <img
                             key={idx}
-                            src={img}
+                            src={getAssetPath(img)}
                             alt={`${project.title} screenshot ${idx}`}
                             className="w-full h-auto object-cover block shadow-sm border-b border-white/5 render-crisp"
                             style={{ 

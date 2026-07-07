@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Plus, Trash2, Upload, X, Briefcase } from "lucide-react";
 import { getExperiences, addExperience, updateExperience, deleteExperience, fileToBase64, type Experience } from "@/lib/storage";
 import ImageLightbox from "@/components/ImageLightbox";
+import { getAssetPath } from "@/lib/utils";
 
 const ExperienceManager = () => {
   const [experiences, setExperiences] = useState<Experience[]>(getExperiences);
@@ -194,7 +195,7 @@ const ExperienceManager = () => {
                 {editing.image && (
                   <div className="relative group w-24 h-24 rounded-lg overflow-hidden">
                     <img
-                      src={editing.image}
+                      src={getAssetPath(editing.image)}
                       alt=""
                       className="w-full h-full object-cover cursor-pointer"
                       onClick={() => setLightbox({ images: [editing.image!], index: 0 })}
@@ -253,7 +254,7 @@ const ExperienceManager = () => {
             <div className="flex items-center gap-4 flex-1 min-w-0">
               <div className="w-12 h-12 rounded-lg bg-secondary flex items-center justify-center flex-shrink-0 overflow-hidden">
                 {exp.image ? (
-                  <img src={exp.image} alt="" className="w-full h-full object-cover" />
+                  <img src={getAssetPath(exp.image)} alt="" className="w-full h-full object-cover" />
                 ) : (
                   <Briefcase size={20} className="text-muted-foreground" />
                 )}
