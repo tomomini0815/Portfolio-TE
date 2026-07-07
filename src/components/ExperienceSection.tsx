@@ -225,6 +225,96 @@ const ExperienceSection = ({ experiences }: ExperienceSectionProps) => {
                               </div>
                             )}
                           </div>
+
+                          {(exp.challenges?.length || exp.process?.length || exp.improvements?.length) && (
+                            <div className="mb-5 md:mb-8">
+                              <button
+                                type="button"
+                                onClick={() => toggleAccordion(exp.id)}
+                                aria-expanded={expandedId === exp.id}
+                                className="w-full flex items-center justify-between gap-4 rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-left transition-colors hover:border-primary/30 hover:bg-primary/5"
+                              >
+                                <span className="text-xs md:text-sm font-display font-bold tracking-wide text-foreground/90">
+                                  課題・制作プロセス・改善のポイント
+                                </span>
+                                <motion.span
+                                  animate={{ rotate: expandedId === exp.id ? 180 : 0 }}
+                                  transition={{ duration: 0.25 }}
+                                  className="text-primary"
+                                >
+                                  <ChevronDown size={18} />
+                                </motion.span>
+                              </button>
+
+                              <AnimatePresence initial={false}>
+                                {expandedId === exp.id && (
+                                  <motion.div
+                                    initial={{ height: 0, opacity: 0 }}
+                                    animate={{ height: "auto", opacity: 1 }}
+                                    exit={{ height: 0, opacity: 0 }}
+                                    transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                                    className="overflow-hidden"
+                                  >
+                                    <div className="space-y-5 pt-5">
+                                      {exp.challenges && exp.challenges.length > 0 && (
+                                        <div className="rounded-xl bg-primary/[0.04] border border-primary/10 p-4">
+                                          <h4 className="text-[10px] font-display font-bold uppercase tracking-[0.2em] text-primary/70 mb-3">
+                                            プロジェクトの課題
+                                          </h4>
+                                          <ul className="grid grid-cols-1 gap-3">
+                                            {exp.challenges.map((challenge, index) => (
+                                              <li key={challenge} className="flex gap-3 rounded-lg bg-black/15 p-3 text-xs md:text-sm text-muted-foreground/90 leading-relaxed">
+                                                <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary/10 text-[10px] font-bold text-primary">
+                                                  {index + 1}
+                                                </span>
+                                                <span>{challenge}</span>
+                                              </li>
+                                            ))}
+                                          </ul>
+                                        </div>
+                                      )}
+
+                                      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                      {exp.process && exp.process.length > 0 && (
+                                        <div className="rounded-xl bg-black/20 border border-white/5 p-4">
+                                          <h4 className="text-[10px] font-display font-bold uppercase tracking-[0.2em] text-primary/70 mb-3">
+                                            制作プロセス
+                                          </h4>
+                                          <ol className="space-y-3">
+                                            {exp.process.map((step, index) => (
+                                              <li key={step} className="flex gap-3 text-xs md:text-sm text-muted-foreground/90 leading-relaxed">
+                                                <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary/10 text-[10px] font-bold text-primary">
+                                                  {index + 1}
+                                                </span>
+                                                <span>{step}</span>
+                                              </li>
+                                            ))}
+                                          </ol>
+                                        </div>
+                                      )}
+
+                                      {exp.improvements && exp.improvements.length > 0 && (
+                                        <div className="rounded-xl bg-black/20 border border-white/5 p-4">
+                                          <h4 className="text-[10px] font-display font-bold uppercase tracking-[0.2em] text-primary/70 mb-3">
+                                            改善・工夫したポイント
+                                          </h4>
+                                          <ul className="space-y-3">
+                                            {exp.improvements.map((improvement) => (
+                                              <li key={improvement} className="flex gap-3 text-xs md:text-sm text-muted-foreground/90 leading-relaxed">
+                                                <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+                                                <span>{improvement}</span>
+                                              </li>
+                                            ))}
+                                          </ul>
+                                        </div>
+                                      )}
+                                      </div>
+                                    </div>
+                                  </motion.div>
+                                )}
+                              </AnimatePresence>
+                            </div>
+                          )}
  
                           {/* Tags Section */}
                           {exp.tags.length > 0 && (

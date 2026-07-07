@@ -167,7 +167,7 @@ const HeroSection = () => {
               transition={{ duration: 0.8 }}
               className="text-yellow-400 font-display text-sm md:text-base font-bold tracking-[0.4em] uppercase mt-8 lg:mt-16 mb-4 lg:mb-8"
             >
-              UI/UX Designer & App Developer
+              UI/UX Designer
             </motion.p>
   
             <TextReveal 
@@ -185,8 +185,8 @@ const HeroSection = () => {
               transition={{ duration: 0.8, delay: 0.8 }}
               className="text-muted-foreground/80 text-lg md:text-xl max-w-xl leading-relaxed font-body backdrop-blur-sm mb-12 lg:mb-16"
             >
-              ユーザー体験を中心に据えたデザインで、<br />
-              人の心を動かすプロダクトを創り出します。
+              使いやすさと分かりやすさを大切に、<br />
+              より良いプロダクトをデザインします。
             </motion.p>
   
             <motion.div

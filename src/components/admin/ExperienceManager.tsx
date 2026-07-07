@@ -15,7 +15,7 @@ const ExperienceManager = () => {
 
   const handleNew = () => {
     setEditing({
-      id: '', company: '', role: '', period: '', description: '', overview: '', team: '', tags: [], image: '', createdAt: '',
+      id: '', company: '', role: '', period: '', description: '', overview: '', team: '', challenges: [], process: [], improvements: [], tags: [], image: '', createdAt: '',
     });
     setIsNew(true);
   };
@@ -25,7 +25,9 @@ const ExperienceManager = () => {
     if (isNew) {
       addExperience({
         company: editing.company, role: editing.role, period: editing.period,
-        description: editing.description, overview: editing.overview, team: editing.team, tags: editing.tags, image: editing.image,
+        description: editing.description, overview: editing.overview, team: editing.team,
+        challenges: editing.challenges, process: editing.process, improvements: editing.improvements,
+        tags: editing.tags, image: editing.image,
       });
     } else {
       updateExperience(editing.id, editing);
@@ -137,6 +139,40 @@ const ExperienceManager = () => {
                     rows={2}
                     className="w-full bg-secondary rounded-lg px-4 py-2.5 text-sm font-body focus:outline-none focus:ring-2 focus:ring-primary resize-none"
                     placeholder="制作体制（PM:1名など）"
+                  />
+                </div>
+              </div>
+
+              <div className="mt-4">
+                <label className="text-sm font-display text-muted-foreground mb-1.5 block">プロジェクトの課題（1行につき1項目）</label>
+                <textarea
+                  value={(editing.challenges || []).join('\n')}
+                  onChange={e => setEditing({ ...editing, challenges: e.target.value.split('\n').map(item => item.trim()).filter(Boolean) })}
+                  rows={4}
+                  className="w-full bg-secondary rounded-lg px-4 py-2.5 text-sm font-body focus:outline-none focus:ring-2 focus:ring-primary resize-y"
+                  placeholder={"必要な情報を見つけるまでに時間がかかる\n画面ごとにUI表現が異なり操作に迷いやすい"}
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-4 mt-4">
+                <div>
+                  <label className="text-sm font-display text-muted-foreground mb-1.5 block">制作プロセス（1行につき1項目）</label>
+                  <textarea
+                    value={(editing.process || []).join('\n')}
+                    onChange={e => setEditing({ ...editing, process: e.target.value.split('\n').map(item => item.trim()).filter(Boolean) })}
+                    rows={5}
+                    className="w-full bg-secondary rounded-lg px-4 py-2.5 text-sm font-body focus:outline-none focus:ring-2 focus:ring-primary resize-y"
+                    placeholder={"課題と利用状況を整理\n情報設計とワイヤーフレームを作成"}
+                  />
+                </div>
+                <div>
+                  <label className="text-sm font-display text-muted-foreground mb-1.5 block">改善・工夫したポイント（1行につき1項目）</label>
+                  <textarea
+                    value={(editing.improvements || []).join('\n')}
+                    onChange={e => setEditing({ ...editing, improvements: e.target.value.split('\n').map(item => item.trim()).filter(Boolean) })}
+                    rows={5}
+                    className="w-full bg-secondary rounded-lg px-4 py-2.5 text-sm font-body focus:outline-none focus:ring-2 focus:ring-primary resize-y"
+                    placeholder={"操作手順を減らして迷いにくくした\n実際の利用環境を想定して検証した"}
                   />
                 </div>
               </div>

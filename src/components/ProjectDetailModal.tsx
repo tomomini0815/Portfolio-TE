@@ -51,6 +51,7 @@ const ProjectDetailModal = ({ project, isOpen, onClose }: ProjectDetailModalProp
 
   // Gradient colors per project
   const gradients: Record<string, string> = {
+    "stock-scout-hub": "from-slate-800/40 via-blue-950/25 to-transparent",
     ainance: "from-indigo-500/20 via-emerald-500/10 to-transparent",
     journify: "from-emerald-500/20 via-cyan-500/10 to-transparent",
     lifebridge: "from-teal-500/20 via-emerald-500/10 to-transparent",
@@ -58,6 +59,7 @@ const ProjectDetailModal = ({ project, isOpen, onClose }: ProjectDetailModalProp
   };
 
   const accentColors: Record<string, string> = {
+    "stock-scout-hub": "text-slate-300",
     ainance: "text-emerald-400",
     journify: "text-cyan-400",
     lifebridge: "text-teal-400",
@@ -65,6 +67,7 @@ const ProjectDetailModal = ({ project, isOpen, onClose }: ProjectDetailModalProp
   };
 
   const borderColors: Record<string, string> = {
+    "stock-scout-hub": "border-slate-500/35",
     ainance: "border-emerald-500/30",
     journify: "border-cyan-500/30",
     lifebridge: "border-teal-500/30",
@@ -72,6 +75,7 @@ const ProjectDetailModal = ({ project, isOpen, onClose }: ProjectDetailModalProp
   };
 
   const btnGradients: Record<string, string> = {
+    "stock-scout-hub": "from-slate-700 to-blue-950",
     ainance: "from-indigo-500 to-emerald-500",
     journify: "from-emerald-500 to-cyan-500",
     lifebridge: "from-teal-500 to-emerald-500",
@@ -82,6 +86,11 @@ const ProjectDetailModal = ({ project, isOpen, onClose }: ProjectDetailModalProp
   const accent = accentColors[project.id] || accentColors.ainance;
   const border = borderColors[project.id] || borderColors.ainance;
   const btnGrad = btnGradients[project.id] || btnGradients.ainance;
+  const scrollDuration = project.id === 'stock-scout-hub'
+    ? 28
+    : project.id === 'lifebridge'
+      ? 30
+      : project.images.length * 5;
 
   return (
     <AnimatePresence>
@@ -99,7 +108,7 @@ const ProjectDetailModal = ({ project, isOpen, onClose }: ProjectDetailModalProp
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="absolute inset-0 bg-background/90 backdrop-blur-xl"
+            className="absolute inset-0 bg-background/95 backdrop-blur-xl"
           />
 
           {/* Modal */}
@@ -108,7 +117,7 @@ const ProjectDetailModal = ({ project, isOpen, onClose }: ProjectDetailModalProp
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            className={`relative w-full max-w-6xl overflow-hidden rounded-2xl md:rounded-3xl border ${border} bg-card/80 backdrop-blur-2xl shadow-2xl`}
+            className={`relative w-full max-w-6xl overflow-hidden rounded-2xl md:rounded-3xl border ${border} bg-card/95 backdrop-blur-2xl shadow-[0_32px_100px_rgba(0,0,0,0.65)] ring-1 ring-white/10`}
           >
             {/* Gradient accent */}
             <div className={`absolute inset-0 bg-gradient-to-br ${gradient} pointer-events-none`} />
@@ -152,7 +161,7 @@ const ProjectDetailModal = ({ project, isOpen, onClose }: ProjectDetailModalProp
                         transition={{
                           repeat: Infinity,
                           repeatType: "loop",
-                          duration: project.id === 'lifebridge' ? 30 : project.images.length * 5, // LifeBridgeの画像は非常に長いため特別に30秒かけてスクロール
+                          duration: scrollDuration,
                           ease: "linear",
                         }}
                       >

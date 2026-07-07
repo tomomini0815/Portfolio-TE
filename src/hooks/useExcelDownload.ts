@@ -16,13 +16,19 @@ export const useExcelDownload = () => {
     setIsExporting(true);
 
     try {
-      // public/skillsheet.xlsx へのパス (キャッシュを回避するためにタイムスタンプを追加)
-      const fileUrl = `/skillsheet.xlsx?v=${Date.now()}`;
+      // タイムスタンプを生成 (YYYYMMDD_HHMMSS形式に近いもの)
+      const now = new Date();
+      const timestamp = now.toISOString().replace(/[:.]/g, "-").slice(0, 19);
+      
+      // public/skillsheet.xlsx へのパス (キャッシュを強力に回避するためにクエリを追加)
+      const fileUrl = `/skillsheet.xlsx?cache_bust=${now.getTime()}`;
       
       // ダウンロード用のアンカー要素を作成
       const link = document.createElement("a");
       link.href = fileUrl;
-      link.download = "skillsheet.xlsx";
+      
+      // ブラウザの重複ファイル名問題を回避するため、ファイル名にもタイムスタンプを付与
+      link.download = `skillsheet_${timestamp}.xlsx`;
       
       // ボディに追加してクリック、その後削除
       document.body.appendChild(link);
