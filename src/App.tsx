@@ -18,7 +18,7 @@ const App = () => (
         <CustomCursor />
         <Toaster />
         <Sonner />
-        <BrowserRouter>
+        <BrowserRouter basename="/Portfolio-TE">
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/admin" element={<Admin />} />
