@@ -4,6 +4,7 @@ import { TextReveal } from "./animations/TextReveal";
 import { Magnetic } from "./animations/MagneticButton";
 import { AnimatedBackground } from "./animations/AnimatedBackground";
 import { GrainOverlay } from "./animations/GrainOverlay";
+import { getAssetPath } from "@/lib/utils";
 
 const HeroSection = () => {
   const ref = useRef(null);
@@ -106,7 +107,7 @@ const HeroSection = () => {
                   }}
                 >
                   <img 
-                    src="/hero-dashboard.png" 
+                    src={getAssetPath("/hero-dashboard.png")} 
                     alt="" 
                     className="w-full h-full object-contain opacity-25 lg:opacity-80"
                   />

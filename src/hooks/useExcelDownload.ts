@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { getAssetPath } from "@/lib/utils";
 
 /**
  * useExcelDownload hook
@@ -21,7 +22,7 @@ export const useExcelDownload = () => {
       const timestamp = now.toISOString().replace(/[:.]/g, "-").slice(0, 19);
       
       // public/skillsheet.xlsx へのパス (キャッシュを強力に回避するためにクエリを追加)
-      const fileUrl = `/skillsheet.xlsx?cache_bust=${now.getTime()}`;
+      const fileUrl = getAssetPath(`/skillsheet.xlsx?cache_bust=${now.getTime()}`);
       
       // ダウンロード用のアンカー要素を作成
       const link = document.createElement("a");
