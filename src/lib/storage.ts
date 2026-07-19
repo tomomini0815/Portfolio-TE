@@ -108,8 +108,8 @@ const defaultProjects: Project[] = [
     description: '結婚、出産、転職、引越し…人生の大きな変化に必要な手続きをAIが最適な順序でナビゲート。給付金を逃さず、スムーズに新生活をスタート。',
     category: 'Life Support / AI',
     tags: ['React', 'TypeScript', 'Supabase', 'Gemini AI', 'Three.js'],
-    images: ['/thumbnails/lifebridge_full_dashboard.png'],
-    link: 'https://lifebridgeapp.jp',
+    images: ['/thumbnails/lifebridge_full_dashboard.png?v=2'],
+    link: 'https://lifebridgeapp.jp/login',
     demoVideo: '/videos/lifebridge-demo.webp',
     highlights: [
       'ライフイベント手続きロードマップ',

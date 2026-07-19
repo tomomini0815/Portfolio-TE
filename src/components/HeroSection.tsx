@@ -198,10 +198,10 @@ const HeroSection = () => {
             >
               <Magnetic strength={30}>
                 <a
-                  href="#projects"
+                  href="#experience"
                   className="group relative inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-5 py-3 md:px-10 md:py-4 rounded-full font-display font-medium text-[11px] md:text-sm tracking-widest overflow-hidden shadow-xl shadow-primary/20"
                 >
-                  <span className="relative z-10">VIEW PROJECTS</span>
+                  <span className="relative z-10">VIEW EXPERIENCE</span>
                   <motion.div
                     className="absolute inset-0 bg-white/20 translate-y-[100%] rounded-[50%]"
                     whileHover={{ translateY: 0 }}

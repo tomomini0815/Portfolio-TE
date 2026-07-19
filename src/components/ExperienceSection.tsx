@@ -147,7 +147,7 @@ const ExperienceSection = ({ experiences }: ExperienceSectionProps) => {
                     <div className="p-[12px] md:p-8">
                       <div className="flex flex-col lg:flex-row gap-3 md:gap-10">
                         {/* LEFT: Image Block */}
-                        <div className="w-full lg:w-[52%] flex-shrink-0 space-y-3 md:space-y-10">
+                        <div className="w-full lg:w-[52%] flex-shrink-0 space-y-4 md:space-y-6">
                           {/* Main Large Image */}
                           {exp.images && exp.images.length > 0 && (
                             <div 
@@ -189,141 +189,57 @@ const ExperienceSection = ({ experiences }: ExperienceSectionProps) => {
                         </div>
  
                         {/* RIGHT: Text Content */}
-                        <div className="flex-grow min-w-0 flex flex-col pt-2">
-                          <div className="flex items-center gap-3 mb-3 md:mb-4">
-                            <span className="text-[10px] px-3 py-1 rounded-full bg-primary/10 text-primary font-display font-bold tracking-widest uppercase border border-primary/20 leading-relaxed text-center">
-                              {exp.period}
-                            </span>
-                          </div>
-                          
-                          <h3 className="font-display text-2xl md:text-3xl font-bold tracking-tight mb-3 md:mb-4 leading-tight text-white group-hover:text-primary/90 transition-colors">
-                            {exp.company}
-                          </h3>
-                          <p className="text-sm md:text-base text-primary/80 font-display font-medium mb-3 md:mb-6">
-                            {exp.role}
-                          </p>
- 
-                          <p className="text-sm md:text-base text-muted-foreground font-body leading-relaxed mb-4 md:mb-8 whitespace-pre-wrap">
-                            {exp.description}
-                          </p>
-
-                          {/* Extra Details Box */}
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-3 md:p-6 rounded-xl bg-stone-900/40 border border-white/5 mb-4 md:mb-8">
-                            {exp.overview && (
-                              <div className="space-y-2">
-                                <h4 className="text-[10px] font-display font-bold uppercase tracking-[0.2em] text-primary/50">制作ポイント</h4>
-                                <p className="text-xs md:text-sm text-muted-foreground/90 leading-relaxed font-body">
-                                  {exp.overview}
-                                </p>
-                              </div>
-                            )}
-                            {exp.team && (
-                              <div className="space-y-2">
-                                <h4 className="text-[10px] font-display font-bold uppercase tracking-[0.2em] text-primary/50">制作体制</h4>
-                                <p className="text-xs md:text-sm text-muted-foreground/90 leading-relaxed font-body">
-                                  {exp.team}
-                                </p>
-                              </div>
-                            )}
-                          </div>
-
-                          {(exp.challenges?.length || exp.process?.length || exp.improvements?.length) && (
-                            <div className="mb-5 md:mb-8">
-                              <button
-                                type="button"
-                                onClick={() => toggleAccordion(exp.id)}
-                                aria-expanded={expandedId === exp.id}
-                                className="w-full flex items-center justify-between gap-4 rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-left transition-colors hover:border-primary/30 hover:bg-primary/5"
-                              >
-                                <span className="text-xs md:text-sm font-display font-bold tracking-wide text-foreground/90">
-                                  課題・制作プロセス・改善のポイント
-                                </span>
-                                <motion.span
-                                  animate={{ rotate: expandedId === exp.id ? 180 : 0 }}
-                                  transition={{ duration: 0.25 }}
-                                  className="text-primary"
-                                >
-                                  <ChevronDown size={18} />
-                                </motion.span>
-                              </button>
-
-                              <AnimatePresence initial={false}>
-                                {expandedId === exp.id && (
-                                  <motion.div
-                                    initial={{ height: 0, opacity: 0 }}
-                                    animate={{ height: "auto", opacity: 1 }}
-                                    exit={{ height: 0, opacity: 0 }}
-                                    transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                                    className="overflow-hidden"
-                                  >
-                                    <div className="space-y-5 pt-5">
-                                      {exp.challenges && exp.challenges.length > 0 && (
-                                        <div className="rounded-xl bg-primary/[0.04] border border-primary/10 p-4">
-                                          <h4 className="text-[10px] font-display font-bold uppercase tracking-[0.2em] text-primary/70 mb-3">
-                                            プロジェクトの課題
-                                          </h4>
-                                          <ul className="grid grid-cols-1 gap-3">
-                                            {exp.challenges.map((challenge, index) => (
-                                              <li key={challenge} className="flex gap-3 rounded-lg bg-black/15 p-3 text-xs md:text-sm text-muted-foreground/90 leading-relaxed">
-                                                <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary/10 text-[10px] font-bold text-primary">
-                                                  {index + 1}
-                                                </span>
-                                                <span>{challenge}</span>
-                                              </li>
-                                            ))}
-                                          </ul>
-                                        </div>
-                                      )}
-
-                                      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                                      {exp.process && exp.process.length > 0 && (
-                                        <div className="rounded-xl bg-black/20 border border-white/5 p-4">
-                                          <h4 className="text-[10px] font-display font-bold uppercase tracking-[0.2em] text-primary/70 mb-3">
-                                            制作プロセス
-                                          </h4>
-                                          <ol className="space-y-3">
-                                            {exp.process.map((step, index) => (
-                                              <li key={step} className="flex gap-3 text-xs md:text-sm text-muted-foreground/90 leading-relaxed">
-                                                <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary/10 text-[10px] font-bold text-primary">
-                                                  {index + 1}
-                                                </span>
-                                                <span>{step}</span>
-                                              </li>
-                                            ))}
-                                          </ol>
-                                        </div>
-                                      )}
-
-                                      {exp.improvements && exp.improvements.length > 0 && (
-                                        <div className="rounded-xl bg-black/20 border border-white/5 p-4">
-                                          <h4 className="text-[10px] font-display font-bold uppercase tracking-[0.2em] text-primary/70 mb-3">
-                                            改善・工夫したポイント
-                                          </h4>
-                                          <ul className="space-y-3">
-                                            {exp.improvements.map((improvement) => (
-                                              <li key={improvement} className="flex gap-3 text-xs md:text-sm text-muted-foreground/90 leading-relaxed">
-                                                <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
-                                                <span>{improvement}</span>
-                                              </li>
-                                            ))}
-                                          </ul>
-                                        </div>
-                                      )}
-                                      </div>
-                                    </div>
-                                  </motion.div>
-                                )}
-                              </AnimatePresence>
+                        <div className="flex-grow min-w-0 flex flex-col pt-2 justify-between">
+                          <div className="space-y-4">
+                            <div className="flex items-center gap-3">
+                              <span className="text-[10px] px-3 py-1 rounded-full bg-primary/10 text-primary font-display font-bold tracking-widest uppercase border border-primary/20 leading-relaxed text-center">
+                                {exp.period}
+                              </span>
                             </div>
-                          )}
- 
+                            
+                            <div>
+                              <h3 className="font-display text-2xl md:text-3xl font-bold tracking-tight mb-2 leading-tight text-white group-hover:text-primary/90 transition-colors">
+                                {exp.company}
+                              </h3>
+                              <p className="text-sm md:text-base text-primary/80 font-display font-medium">
+                                {exp.role}
+                              </p>
+                            </div>
+
+                            {/* Extra Details Box (Moved above description for better Scanability and Information Hierarchy) */}
+                            {(exp.overview || exp.team) && (
+                              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 p-4 md:p-5 rounded-xl bg-stone-900/40 border border-white/5">
+                                {exp.overview && (
+                                  <div className="space-y-1.5">
+                                    <h4 className="text-[10px] font-display font-bold uppercase tracking-[0.2em] text-primary/50">制作ポイント</h4>
+                                    <p className="text-xs md:text-sm text-muted-foreground/90 leading-relaxed font-body">
+                                      {exp.overview}
+                                    </p>
+                                  </div>
+                                )}
+                                {exp.team && (
+                                  <div className="space-y-1.5">
+                                    <h4 className="text-[10px] font-display font-bold uppercase tracking-[0.2em] text-primary/50">制作体制</h4>
+                                    <p className="text-xs md:text-sm text-muted-foreground/90 leading-relaxed font-body">
+                                      {exp.team}
+                                    </p>
+                                  </div>
+                                )}
+                              </div>
+                            )}
+
+                            <p className="text-sm md:text-base text-muted-foreground font-body leading-relaxed whitespace-pre-wrap">
+                              {exp.description}
+                            </p>
+                          </div>
+
                           {/* Tags Section */}
                           {exp.tags.length > 0 && (
-                            <div className="flex flex-wrap gap-2 mt-auto">
+                            <div className="flex flex-wrap gap-1.5 pt-6">
                               {exp.tags.map((tag) => (
                                 <span
                                   key={tag}
-                                  className="text-[9px] font-display font-bold px-3 py-1.5 rounded-lg bg-white/5 text-muted-foreground border border-white/5 tracking-[0.15em] hover:bg-primary/10 hover:text-primary hover:border-primary/20 transition-colors"
+                                  className="text-[9px] font-display font-bold px-2.5 py-1 rounded-lg bg-white/5 text-muted-foreground border border-white/5 tracking-wider hover:bg-primary/10 hover:text-primary hover:border-primary/20 transition-colors"
                                 >
                                   {tag}
                                 </span>
@@ -332,6 +248,97 @@ const ExperienceSection = ({ experiences }: ExperienceSectionProps) => {
                           )}
                         </div>
                       </div>
+
+                      {/* 課題・制作プロセス・改善のポイント アコーディオンをここに配置して横幅全体に拡張 */}
+                      {(exp.challenges?.length || exp.process?.length || exp.improvements?.length) && (
+                        <div className="mt-6 md:mt-8 border-t border-white/5 pt-6 md:pt-8">
+                          <button
+                            type="button"
+                            onClick={() => toggleAccordion(exp.id)}
+                            aria-expanded={expandedId === exp.id}
+                            className="w-full flex items-center justify-between gap-4 rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-left transition-colors hover:border-primary/30 hover:bg-primary/5"
+                          >
+                            <span className="text-xs md:text-sm font-display font-bold tracking-wide text-foreground/90">
+                              課題・制作プロセス・改善のポイント
+                            </span>
+                            <motion.span
+                              animate={{ rotate: expandedId === exp.id ? 180 : 0 }}
+                              transition={{ duration: 0.25 }}
+                              className="text-primary"
+                            >
+                              <ChevronDown size={18} />
+                            </motion.span>
+                          </button>
+
+                          <AnimatePresence initial={false}>
+                            {expandedId === exp.id && (
+                              <motion.div
+                                initial={{ height: 0, opacity: 0 }}
+                                animate={{ height: "auto", opacity: 1 }}
+                                exit={{ height: 0, opacity: 0 }}
+                                transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                                className="overflow-hidden"
+                              >
+                                <div className="pt-5">
+                                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+                                    {exp.challenges && exp.challenges.length > 0 && (
+                                      <div className="rounded-xl bg-primary/[0.04] border border-primary/10 p-4">
+                                        <h4 className="text-[10px] font-display font-bold uppercase tracking-[0.2em] text-primary/70 mb-3">
+                                          プロジェクトの課題
+                                        </h4>
+                                        <ul className="grid grid-cols-1 gap-3">
+                                          {exp.challenges.map((challenge, index) => (
+                                            <li key={challenge} className="flex gap-3 rounded-lg bg-black/15 p-3 text-xs md:text-sm text-muted-foreground/90 leading-relaxed">
+                                              <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary/10 text-[10px] font-bold text-primary">
+                                                {index + 1}
+                                              </span>
+                                              <span>{challenge}</span>
+                                            </li>
+                                          ))}
+                                        </ul>
+                                      </div>
+                                    )}
+
+                                    {exp.process && exp.process.length > 0 && (
+                                      <div className="rounded-xl bg-black/20 border border-white/5 p-4">
+                                        <h4 className="text-[10px] font-display font-bold uppercase tracking-[0.2em] text-primary/70 mb-3">
+                                          制作プロセス
+                                        </h4>
+                                        <ol className="space-y-3">
+                                          {exp.process.map((step, index) => (
+                                            <li key={step} className="flex gap-3 text-xs md:text-sm text-muted-foreground/90 leading-relaxed">
+                                              <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary/10 text-[10px] font-bold text-primary">
+                                                {index + 1}
+                                              </span>
+                                              <span>{step}</span>
+                                            </li>
+                                          ))}
+                                        </ol>
+                                      </div>
+                                    )}
+
+                                    {exp.improvements && exp.improvements.length > 0 && (
+                                      <div className="rounded-xl bg-black/20 border border-white/5 p-4">
+                                        <h4 className="text-[10px] font-display font-bold uppercase tracking-[0.2em] text-primary/70 mb-3">
+                                          改善・工夫したポイント
+                                        </h4>
+                                        <ul className="space-y-3">
+                                          {exp.improvements.map((improvement) => (
+                                            <li key={improvement} className="flex gap-3 text-xs md:text-sm text-muted-foreground/90 leading-relaxed">
+                                              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+                                              <span>{improvement}</span>
+                                            </li>
+                                          ))}
+                                        </ul>
+                                      </div>
+                                    )}
+                                  </div>
+                                </div>
+                              </motion.div>
+                            )}
+                          </AnimatePresence>
+                        </div>
+                      )}
                     </div>
                   </motion.div>
                 </motion.div>

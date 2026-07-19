@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { TextReveal } from "./animations/TextReveal";
+import { getAssetPath } from "@/lib/utils";
 
 const AboutSection = () => {
   const skills = [
@@ -117,7 +118,7 @@ const AboutSection = () => {
                 className="surface-elevated rounded-2xl p-6 md:p-8 card-shadow border border-white/5 relative group"
               >
                 <div className="absolute top-0 right-0 p-6 opacity-[0.03] pointer-events-none transition-opacity group-hover:opacity-[0.06] duration-500">
-                  <img src="/favicon.png" alt="" className="w-24 h-24 grayscale brightness-0 invert" />
+                  <img src={getAssetPath("/favicon.png")} alt="" className="w-24 h-24 grayscale brightness-0 invert" />
                 </div>
                 
                 <h3 className="font-display font-bold text-lg text-yellow-400 mb-6 flex items-center gap-4">

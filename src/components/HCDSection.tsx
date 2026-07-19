@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, ArrowRight } from "lucide-react";
 
@@ -212,11 +212,16 @@ const processes = [
     id: "01",
     title: "利用状況の把握",
     subtitle: "Research & Empathize",
-    description: "ユーザーインタビューや行動観察を通じ、表面化していない本質的な課題と潜在的ニーズを発見します。",
+    description: "ユーザーインタビューや行動観察を通じて、まだ見えていない本質的な課題や、ユーザー自身も気づいていない潜在ニーズを深くすくい上げていきます。",
     Visual: VisualResearch,
     details: {
       overview: "ターゲットユーザーの深層心理や行動パターンを解明します。単なるヒアリングではなく、なぜその行動をとるのかという「Why」を掘り下げます。",
-      methods: ["ユーザーインタビュー", "デプスインタビュー（行動観察）", "アンケート調査", "競合調査"],
+      methods: [
+        "ユーザーインタビュー",
+        "ヘルプ・問い合わせ頻度の分析",
+        "これまでのクレーム等の調査・分析",
+        "競合調査"
+      ],
       outputs: ["ペルソナ", "カスタマージャーニーマップ", "エンパシーマップ", "ユーザーリサーチレポート"],
     }
   },
@@ -224,7 +229,7 @@ const processes = [
     id: "02",
     title: "要求事項の定義",
     subtitle: "Define Requirements",
-    description: "ユーザーの目標とビジネスの目標をすり合わせ、本当に解決すべきコアとなる要件を定義します。",
+    description: "ユーザーの本当の願いとビジネスゴールをていねいにすり合わせ、プロダクトが解決すべき「真のテーマ」を一緒に見極めて整理します。",
     Visual: VisualDefine,
     details: {
       overview: "リサーチ結果をもとに「本当に解決すべき本質的な課題」を特定し、プロダクトが提供するコアバリュー（価値）を定義します。ビジネス要件とユーザー要件のバランスを取ります。",
@@ -236,7 +241,7 @@ const processes = [
     id: "03",
     title: "設計とプロトタイピング",
     subtitle: "Ideate & Prototype",
-    description: "課題解決のためのアイデアを視覚化し、素早く操作可能なプロトタイプを作成して仮説を形にします。",
+    description: "課題を解決するアイデアをすばやくビジュアルにし、実際に触って試せるプロトタイプを作ることで、頭の中の仮説を具体的なカタチにしていきます。",
     Visual: VisualPrototype,
     details: {
       overview: "要件定義に基づき、ユーザーが直感的に操作できるインターフェースへと視覚化します。ワイヤーフレームによる情報設計から始まり、実際の操作感やインタラクションを検証可能な高忠実度（High-Fi）のプロトタイプまで構築します。",
@@ -248,7 +253,7 @@ const processes = [
     id: "04",
     title: "評価と検証",
     subtitle: "Test & Evaluate",
-    description: "実際のユーザーによるユーザビリティテストを行い、得られたフィードバックに基づき体験を洗練させます。",
+    description: "実際のユーザーにプロダクトを体験してもらうテストを行い、生の声やリアルな反応をもとに、使いやすさをさらに心地よい体験へと磨き上げていきます。",
     Visual: VisualTest,
     details: {
       overview: "作成したプロトタイプを実際のターゲットユーザーに触ってもらい、使いやすさや目標の達成しやすさを検証します。得られたフィードバックから反復的に（Iterative）改善を行い、品質を高めます。",
@@ -289,8 +294,17 @@ const ProcessCard = ({
       variants={itemVariants}
       layout
       transition={{ duration: 0.4, ease: "easeInOut" }}
-      className={`group relative overflow-hidden backdrop-blur-sm border rounded-2xl transition-all duration-500 flex flex-col ${
-        isExpanded ? "bg-secondary/50 border-primary/30 shadow-[0_8px_30px_-4px_rgba(var(--primary),0.1)] h-auto" : "bg-secondary/30 border-border/50 hover:bg-secondary/50 h-[340px] md:h-[420px]"
+      data-card-id={process.id}
+      onClick={(e) => {
+        const target = e.target as HTMLElement;
+        // If clicking inside expanded accordion details, don't toggle
+        if (target.closest('.accordion-content')) {
+          return;
+        }
+        onToggle();
+      }}
+      className={`group relative overflow-hidden backdrop-blur-sm border rounded-2xl transition-all duration-500 flex flex-col cursor-pointer ${
+        isExpanded ? "bg-secondary/50 border-primary/30 shadow-[0_8px_30px_-4px_rgba(var(--primary),0.1)] h-auto" : "bg-secondary/30 border-border/50 hover:bg-secondary/50 h-[330px] md:h-[385px]"
       }`}
     >
       {/* Number indicator */}
@@ -316,7 +330,10 @@ const ProcessCard = ({
           </p>
           
           <button 
-            onClick={onToggle}
+            onClick={(e) => {
+              e.stopPropagation();
+              onToggle();
+            }}
             className="mt-4 self-start text-xs font-medium text-foreground hover:text-primary transition-colors flex items-center gap-1.5 focus:outline-none"
           >
             {isExpanded ? "閉じる" : "詳しく見る"}
@@ -335,7 +352,7 @@ const ProcessCard = ({
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.4, ease: "easeInOut" }}
-            className="overflow-hidden bg-background/50 border-t border-border/50"
+            className="accordion-content overflow-hidden bg-background/50 border-t border-border/50"
           >
             <div className="p-5 md:p-6 text-sm text-foreground space-y-4">
               <div>
@@ -382,10 +399,37 @@ const ProcessCard = ({
 };
 
 const HCDSection = () => {
-  const [activeId, setActiveId] = useState<string | null>(null);
+  const [expandedIds, setExpandedIds] = useState<string[]>([]);
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (expandedIds.length > 0 && sectionRef.current) {
+        const target = event.target as HTMLElement;
+        // Close all if click is outside any process card (not just the active ones)
+        const isInsideCard = target.closest('[data-card-id]');
+        if (!isInsideCard) {
+          setExpandedIds([]);
+        }
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [expandedIds]);
+
+  const handleToggle = (id: string) => {
+    setExpandedIds(prev => 
+      prev.includes(id) 
+        ? prev.filter(item => item !== id) 
+        : [...prev, id]
+    );
+  };
 
   return (
-    <section id="hcd-philosophy" className="py-24 md:py-32 relative overflow-hidden bg-background">
+    <section ref={sectionRef} id="hcd-philosophy" className="py-24 md:py-32 relative overflow-hidden bg-background">
       {/* Background decoration */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[60vw] max-w-[800px] max-h-[800px] rounded-full bg-primary/5 blur-3xl opacity-50 pointer-events-none" />
 
@@ -441,8 +485,8 @@ const HCDSection = () => {
                 <ProcessCard 
                   process={process} 
                   index={index} 
-                  isExpanded={activeId === process.id}
-                  onToggle={() => setActiveId(activeId === process.id ? null : process.id)}
+                  isExpanded={expandedIds.includes(process.id)}
+                  onToggle={() => handleToggle(process.id)}
                 />
                 
                 {/* Arrow Flow Indicator pointing to the next step */}
