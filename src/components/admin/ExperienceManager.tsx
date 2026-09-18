@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import { motion } from "framer-motion";
-import { Plus, Trash2, Upload, X, Briefcase } from "lucide-react";
+import { Plus, Trash2, Upload, X, Briefcase, FileText } from "lucide-react";
+import { Link } from "react-router-dom";
 import { getExperiences, addExperience, updateExperience, deleteExperience, fileToBase64, type Experience } from "@/lib/storage";
 import ImageLightbox from "@/components/ImageLightbox";
 import { getAssetPath } from "@/lib/utils";
@@ -62,12 +63,21 @@ const ExperienceManager = () => {
     <div>
       <div className="flex items-center justify-between mb-6">
         <h2 className="font-display text-xl font-bold">経歴管理</h2>
-        <button
-          onClick={handleNew}
-          className="flex items-center gap-2 bg-primary text-primary-foreground px-5 py-2.5 rounded-lg font-display text-sm font-medium hover:opacity-90 transition-opacity"
-        >
-          <Plus size={16} /> 新規追加
-        </button>
+        <div className="flex items-center gap-3">
+          <Link
+            to="/pdf"
+            target="_blank"
+            className="flex items-center gap-2 bg-amber-400/15 text-amber-400 border border-amber-400/30 px-4 py-2 rounded-lg font-display text-xs font-semibold hover:bg-amber-400/25 transition-all"
+          >
+            <FileText size={14} /> 提出用PDFをプレビュー・出力
+          </Link>
+          <button
+            onClick={handleNew}
+            className="flex items-center gap-2 bg-primary text-primary-foreground px-5 py-2.5 rounded-lg font-display text-sm font-medium hover:opacity-90 transition-opacity"
+          >
+            <Plus size={16} /> 新規追加
+          </button>
+        </div>
       </div>
 
       {editing && (

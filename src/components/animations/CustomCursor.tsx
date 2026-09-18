@@ -46,12 +46,13 @@ export const CustomCursor = () => {
         };
     }, [mouseX, mouseY, isMobile]);
 
-    // モバイルでは何もレンダリングしない
+    // モバイルおよびPDFプレビュー画面では何もレンダリングしない
     if (isMobile) return null;
+    if (typeof window !== "undefined" && window.location.pathname.includes("/pdf")) return null;
 
     return (
         <motion.div
-            className="fixed top-0 left-0 w-4 h-4 rounded-full bg-primary pointer-events-none z-[100] flex items-center justify-center text-[10px] font-display font-bold text-primary-foreground overflow-hidden mix-blend-difference"
+            className="custom-cursor fixed top-0 left-0 w-4 h-4 rounded-full bg-primary pointer-events-none z-[100] flex items-center justify-center text-[10px] font-display font-bold text-primary-foreground overflow-hidden mix-blend-difference print:hidden"
             style={{
                 x: cursorX,
                 y: cursorY,

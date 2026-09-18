@@ -1,8 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;600;700&family=Bebas+Neue&family=Alex+Brush&family=Caveat:wght@600;700&family=Great+Vibes&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.font-bebas {
+  font-family: 'Bebas Neue', sans-serif;
+}
+.font-script {
+  font-family: 'Alex Brush', cursive;
+}
+.font-caveat {
+  font-family: 'Caveat', cursive;
+}
 
 @layer base {
   :root {
@@ -164,65 +174,151 @@
     overflow: visible !important;
   }
 
-  /* But keep overflow hidden only on elements that need it for layout */
-  img, video {
+  /* But keep overflow hidden on elements that need it for layout */
+  img, video, .overflow-hidden, .pdf-sheet, .pdf-sheet-wrapper {
     overflow: hidden !important;
   }
 
-  /* Hide navigation bar */
-  nav {
+  /* Hide navigation bar and non-print elements */
+  nav,
+  .custom-cursor,
+  [data-pdf-hide],
+  .print\:hidden,
+  section[aria-label*="Notification"],
+  [data-sonner-toaster],
+  ol[data-sonner-toaster],
+  .toaster {
     display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    max-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
   }
 
-  /* Hide scroll indicator and other print-excluded elements */
-  [data-pdf-hide] {
-    display: none !important;
-  }
-
-  /* Background colors */
+  /* Background colors for print (clean white base to prevent black pages) */
   html, body {
-    background-color: hsl(240, 6%, 7%) !important;
-    color: hsl(45, 30%, 92%) !important;
+    background-color: #ffffff !important;
+    color: #1a1a1a !important;
+    padding: 0 !important;
+    margin: 0 !important;
   }
 
   body {
     padding-top: 0 !important;
   }
 
-  /* Compress hero section height for print */
-  section:first-of-type {
+  /* Compress hero section height for print only on non-PDF pages */
+  body:not(:has(.pdf-sheet)) section:first-of-type {
     min-height: 0 !important;
-    padding-top: 3rem !important;
-    padding-bottom: 3rem !important;
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
   }
 
-  /* Make background orbs/blurs invisible (they're aesthetic only) */
-  section:first-of-type > div:first-child,
-  .pointer-events-none {
+  /* Make background orbs/blurs invisible only on non-PDF pages */
+  body:not(:has(.pdf-sheet)) section:first-of-type > div:first-child,
+  body:not(:has(.pdf-sheet)) .pointer-events-none {
     display: none !important;
   }
 
-  /* Ensure text is high contrast */
-  .text-muted-foreground {
-    color: hsl(45, 20%, 65%) !important;
+  /* Ensure decorative elements in PDF sheets remain visible and styled during print */
+  .pdf-sheet .pointer-events-none {
+    display: block !important;
+  }
+  .pdf-sheet span.pointer-events-none {
+    display: inline-block !important;
+  }
+  .pdf-sheet .-rotate-\[8deg\] {
+    transform: rotate(-8deg) !important;
   }
 
-  /* Remove blur effects that don't print well */
+  /* Ensure text is readable */
+  .text-muted-foreground {
+    color: #555555 !important;
+  }
+
+  /* Remove blur effects */
   .blur-\[120px\], .blur-\[100px\], .blur-\[150px\] {
     filter: none !important;
   }
 
-  /* Avoid page breaks inside cards and sections */
-  section,
-  .card-shadow,
-  .surface-elevated {
-    page-break-inside: avoid;
-    break-inside: avoid;
+  /* Dedicated PDF Sheet Page Break rules (A4 Landscape: 297mm x 210mm) */
+  .pdf-document-container {
+    margin: 0 !important;
+    padding: 0 !important;
+    max-width: none !important;
+    width: 297mm !important;
   }
 
-  /* Page size */
+  .pdf-sheet-wrapper {
+    page-break-after: always !important;
+    break-after: page !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    width: 297mm !important;
+    height: 210mm !important;
+    max-height: 210mm !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+    background-color: #ffffff !important;
+  }
+
+  .pdf-sheet-wrapper:first-child {
+    page-break-before: avoid !important;
+    break-before: avoid !important;
+  }
+
+  .pdf-sheet-wrapper:last-child {
+    page-break-after: avoid !important;
+    break-after: avoid !important;
+  }
+
+  .pdf-sheet-wrapper:has(.cover-sheet) {
+    background-color: #0b1924 !important;
+  }
+
+  .pdf-sheet {
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    border: none !important;
+    width: 297mm !important;
+    height: 210mm !important;
+    max-height: 210mm !important;
+    padding: 7mm 10mm !important;
+    margin: 0 !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+    background-color: #ffffff !important;
+    color: #222222 !important;
+  }
+
+  .pdf-sheet.cover-sheet {
+    background-color: #0b1924 !important;
+    color: #ffffff !important;
+    padding: 0 !important;
+  }
+
+  /* Page size: exact A4 landscape with 0 margin */
   @page {
-    size: A4 portrait;
-    margin: 12mm 10mm;
+    size: A4 landscape;
+    margin: 0;
   }
 }
+
+/* ─── Screen Styles for PDF Sheets ─────────────────────────────────────────── */
+.pdf-sheet.a4-landscape {
+  width: 100%;
+  max-width: 1100px;
+  aspect-ratio: 297 / 210;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+
+

@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Admin from "./pages/Admin";
+import PortfolioPdf from "./pages/PortfolioPdf";
 import NotFound from "./pages/NotFound";
 import { SmoothScroll } from "@/components/animations/SmoothScroll";
 import { CustomCursor } from "@/components/animations/CustomCursor";
@@ -22,6 +23,7 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/admin" element={<Admin />} />
+            <Route path="/pdf" element={<PortfolioPdf />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

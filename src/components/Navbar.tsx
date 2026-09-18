@@ -15,7 +15,7 @@ const Navbar = () => {
         </a>
 
         {/* Desktop nav */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-6">
           <a href="#experience" className="group flex flex-col items-center transition-opacity hover:opacity-80">
             <span className="text-sm font-display leading-tight text-foreground">Experience</span>
             <span className="text-[10px] font-body tracking-wider mt-0.5 text-muted-foreground">経歴</span>
@@ -29,13 +29,24 @@ const Navbar = () => {
             <span className="text-[10px] font-body tracking-wider mt-0.5 text-muted-foreground">私について</span>
           </a>
 
+          {/* PDF Portfolio Button (Disabled) */}
+          <button
+            type="button"
+            disabled
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full font-display font-medium text-xs tracking-tight bg-amber-400/10 text-amber-400/60 border border-amber-400/20 opacity-60 cursor-not-allowed select-none"
+            title="PORTFOLIO（PDF）は現在準備中です"
+          >
+            <Download size={13} />
+            <span>PORTFOLIO（PDF）</span>
+          </button>
+
           {/* Excel Download button – desktop (Elite Premium Style) */}
           <motion.button
             onClick={downloadExcel}
             disabled={isExporting}
             whileHover={{ scale: isExporting ? 1 : 1.05 }}
             whileTap={{ scale: isExporting ? 1 : 0.97 }}
-            className="relative inline-flex items-center gap-2 bg-white text-slate-900 px-4 py-2 rounded-full font-display font-medium text-xs tracking-tight shadow-[0_0_20px_-5px_rgba(245,158,11,0.3)] hover:shadow-[0_0_25px_-5px_rgba(245,158,11,0.5)] transition-all disabled:opacity-60 disabled:cursor-not-allowed overflow-hidden"
+            className="relative inline-flex items-center gap-2 bg-white text-slate-900 px-4 py-2 rounded-full font-display font-medium text-xs tracking-tight shadow-[0_0_20px_-5px_rgba(245,158,11,0.3)] hover:shadow-[0_0_25px_-5px_rgba(245,158,11,0.5)] transition-all disabled:opacity-60 disabled:cursor-not-allowed overflow-hidden cursor-pointer"
             aria-label="Download Excel"
           >
             <motion.span
@@ -109,6 +120,17 @@ const Navbar = () => {
                 <span className="text-sm font-display leading-tight text-foreground">About</span>
                 <span className="text-[10px] text-muted-foreground tracking-wider mt-0.5">私について</span>
               </a>
+
+              {/* PDF Portfolio button – mobile (Disabled) */}
+              <button
+                type="button"
+                disabled
+                className="mt-2 flex items-center justify-center gap-2 bg-amber-400/10 text-amber-300/60 border border-amber-400/20 px-4 py-3 rounded-xl font-display font-medium text-sm tracking-tight w-full opacity-60 cursor-not-allowed select-none"
+                title="PORTFOLIO（PDF）は現在準備中です"
+              >
+                <Download size={16} />
+                PORTFOLIO（PDF）
+              </button>
 
               {/* Excel Download button – mobile (Elite Premium Style) */}
               <button

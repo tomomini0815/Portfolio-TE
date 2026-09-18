@@ -84,19 +84,21 @@ const ExperienceSection = ({ experiences }: ExperienceSectionProps) => {
             <p className="text-yellow-400 text-xs font-display font-bold tracking-[0.3em] uppercase mb-4">
               Experience <span className="text-yellow-400/80 ml-2 font-bold tracking-normal text-sm lowercase leading-none">| 2021 — 2026</span>
             </p>
-            <div className="flex flex-col md:flex-row md:items-baseline gap-4">
-              <TextReveal className="font-display text-4xl md:text-5xl font-bold" wordMode={false}>
-                これまでの経歴
-              </TextReveal>
-              <motion.span 
-                initial={{ opacity: 0, x: 10 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.3 }}
-                className="text-muted-foreground text-lg md:text-xl font-display font-medium"
-              >
-                — デザイナー歴約5年
-              </motion.span>
+            <div className="flex flex-col md:flex-row md:items-baseline justify-between gap-4">
+              <div className="flex flex-col md:flex-row md:items-baseline gap-4">
+                <TextReveal className="font-display text-4xl md:text-5xl font-bold" wordMode={false}>
+                  これまでの経歴
+                </TextReveal>
+                <motion.span 
+                  initial={{ opacity: 0, x: 10 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.3 }}
+                  className="text-muted-foreground text-lg md:text-xl font-display font-medium"
+                >
+                  — デザイナー歴約5年
+                </motion.span>
+              </div>
             </div>
           </motion.div>
 
